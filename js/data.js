@@ -5,6 +5,7 @@
    ========================================================================== */
 
 const STORAGE_KEY = "AWW_BIHAR_INVENTORY_MPR_V1";
+window.STORAGE_KEY = STORAGE_KEY;
 
 // Bihar ICDS Approved Commodities Master (As per Dariyapur, Saran official menu)
 var BIHAR_COMMODITIES = window.BIHAR_COMMODITIES = [

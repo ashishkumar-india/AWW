@@ -98,21 +98,17 @@ function _hideLoginOverlay() {
 async function logoutUser() {
   const sb = window._sbAuthClient;
   if (sb) {
-    await sb.auth.signOut();
+    try {
+      await sb.auth.signOut();
+    } catch (e) {
+      console.warn("Sign out error:", e);
+    }
   }
   // Clear localStorage cache
+  localStorage.removeItem("AWW_BIHAR_INVENTORY_MPR_V1");
   if (window.STORAGE_KEY) localStorage.removeItem(window.STORAGE_KEY);
-  // Show login screen
-  const overlay = document.getElementById("loginOverlay");
-  if (overlay) {
-    document.getElementById("loginEmail").value = "";
-    document.getElementById("loginPassword").value = "";
-    document.getElementById("loginErrorMsg").style.display = "none";
-    document.getElementById("loginBtnText").textContent = "🔐 लॉगिन करें";
-    overlay.style.opacity = "0";
-    overlay.style.display = "flex";
-    requestAnimationFrame(() => { overlay.style.opacity = "1"; });
-  }
+  // Reload page to flush in-memory state and present clean login screen
+  window.location.reload();
 }
 
 window.initAuth = initAuth;
