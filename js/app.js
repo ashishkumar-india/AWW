@@ -4,7 +4,12 @@
    ========================================================================== */
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // Wait for Supabase to load fresh data (or fall through instantly if offline/not configured)
+  // 1. Check authentication (Supabase login)
+  if (window.initAuth) {
+    const isAuthed = await window.initAuth();
+    if (!isAuthed) return; // Login screen shown — app will init after successful login
+  }
+  // 2. Wait for Supabase data to load (or fall through if offline)
   if (window.dbReady) await window.dbReady;
   initApp();
 });
@@ -22,6 +27,12 @@ function initApp() {
   renderTransactionsLedger();
 
   if (window.renderMonthlyBhandarPanjiUI) renderMonthlyBhandarPanjiUI();
+
+  // Show logout button in Settings if Supabase auth is configured
+  const logoutSection = document.getElementById("logoutSection");
+  if (logoutSection && window.SUPABASE_CONFIG) {
+    logoutSection.style.display = "block";
+  }
 
   // 4. Setup Event Listeners
   setupNavigation();

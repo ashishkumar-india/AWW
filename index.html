@@ -29,6 +29,38 @@
   <link rel="stylesheet" href="css/responsive.css?v=20260917_14">
 </head>
 <body>
+
+  <!-- ================================================================
+       LOGIN OVERLAY — shown when user is not authenticated
+       ================================================================ -->
+  <div id="loginOverlay">
+    <div class="login-card">
+      <div class="login-logo-emoji">📖</div>
+      <h1 class="login-app-name">आंगनवाड़ी भंडार डायरी</h1>
+      <p class="login-centre-tag">Bihar ICDS • केंद्र 201, दरियापुर (सारण)</p>
+      <div class="login-divider"></div>
+
+      <form id="loginForm" autocomplete="on">
+        <div class="login-field">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" name="email"
+                 placeholder="your@email.com" required autocomplete="email">
+        </div>
+        <div class="login-field">
+          <label for="loginPassword">पासवर्ड (Password)</label>
+          <input type="password" id="loginPassword" name="password"
+                 placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <div id="loginErrorMsg"></div>
+        <button type="submit" class="login-btn" id="loginBtn">
+          <span id="loginBtnText">🔐 लॉगिन करें</span>
+        </button>
+      </form>
+
+      <p class="login-footer-text">Secured by Supabase • Bihar ICDS © 2026</p>
+    </div>
+  </div>
+
   <!-- Header: Android Mobile AppBar -->
   <header class="app-header no-print">
     <div class="header-container">
@@ -1003,6 +1035,14 @@
         </div>
       </div>
 
+      <!-- Logout Button (only shown when Supabase auth is active) -->
+      <div id="logoutSection" style="display:none; padding: 0 16px 16px;">
+        <button class="logout-btn" onclick="logoutUser()">
+          <span style="font-size:1.2rem;">&#x1F6AA;</span>
+          <span>लॉगआउट करें (Logout)</span>
+        </button>
+      </div>
+
       <div class="settings-grid">
         <!-- Centre Profile Form -->
         <div class="section-card">
@@ -1509,6 +1549,7 @@
 
   <script src="js/export.js?v=20260917_14"></script>
   <script src="js/app.js?v=20260917_14"></script>
+  <script src="js/auth.js?v=20260917_16"></script>
   <!-- Fix #5: PWA Service Worker Registration -->
   <script>
     if ('serviceWorker' in navigator) {
