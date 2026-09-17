@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    Bihar State ICDS - Anganwadi Sevika Management System
    Bilingual Translation Dictionary: js/i18n.js
    ========================================================================== */
@@ -159,8 +159,9 @@ const I18N = {
   }
 };
 
-// Fix #17: Restore saved language on load, default to 'hi'
-let currentLang = localStorage.getItem('aww_lang') || 'hi';
+// Language locked to Hindi ('hi')
+let currentLang = 'hi';
+localStorage.setItem('aww_lang', 'hi');
 
 function getTranslation(key) {
   return I18N[currentLang][key] || key;

@@ -309,6 +309,44 @@
   .logout-btn:hover { background: #2D0F17; }
 }
 
+/* Header Logout Button (Top Navigation) */
+.btn-logout-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FEF2F2;
+  color: #DC2626;
+  border: 1.5px solid #FECDD3;
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-logout-top:hover {
+  background: #DC2626;
+  color: #FFFFFF;
+  border-color: #DC2626;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.25);
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn-logout-top {
+    background: #270E14;
+    color: #F87171;
+    border-color: #991B1B;
+  }
+  .btn-logout-top:hover {
+    background: #DC2626;
+    color: #FFFFFF;
+  }
+}
+
 /* Reset & Base Setup */
 *, *::before, *::after {
   box-sizing: border-box;

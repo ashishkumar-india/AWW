@@ -68,7 +68,7 @@
         <span class="brand-avatar">📖</span>
         <div class="brand-text">
           <h1 class="brand-title">आंगनवाड़ी भंडार डायरी</h1>
-          <div class="brand-sub">दैनिक पोषाहार एवं भंडार पंजी प्रबंधन</div>
+          <div class="brand-sub">बिहार ICDS पोषाहार एवं स्टॉक पंजी</div>
         </div>
       </div>
 
@@ -80,25 +80,17 @@
           <span class="btn-text-sm">मेनू</span>
         </button>
 
-        <!-- Language Switcher -->
-        <button id="langToggleBtn" class="btn btn-secondary btn-lang" title="Switch Language">
-          <span class="icon">🌐</span>
-          <span id="langLabel">English</span>
-        </button>
-
-        <!-- Centre Quick Info Pill -->
-        <div class="centre-pill" id="centreQuickInfo" title="AWC Details / Settings">
-          <div class="pill-dot"></div>
-          <div>
-            <div class="pill-title" id="pillAwcName">आंगनवाड़ी केंद्र</div>
-            <div class="pill-sub" id="pillAwcCode">भंडार प्रबंधन</div>
-          </div>
-        </div>
         <!-- Supabase Sync Status Indicator -->
         <div id="syncStatusPill" style="display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;background:rgba(0,0,0,0.06);font-size:12px;font-weight:600;cursor:default;" title="Supabase connection status">
           <span id="syncDot" style="width:8px;height:8px;border-radius:50%;background:#F59E0B;display:inline-block;transition:background 0.4s;"></span>
           <span id="syncLabel" style="color:inherit;">Sync...</span>
         </div>
+
+        <!-- Top Logout Button -->
+        <button id="btnHeaderLogout" class="btn-logout-top" onclick="logoutUser()" title="लॉगआउट करें">
+          <span class="icon">🚪</span>
+          <span>लॉगआउट</span>
+        </button>
       </div>
     </div>
   </header>
