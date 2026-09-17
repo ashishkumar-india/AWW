@@ -1,0 +1,712 @@
+/* ==========================================================================
+   Bihar State ICDS - Anganwadi Sevika Management System
+   Inventory & Stock Ledger Styles: css/inventory.css
+   ========================================================================== */
+
+/* KPI Summary Cards Grid */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.kpi-card {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  border: 1px solid var(--neutral-border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.kpi-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.kpi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.kpi-icon {
+  font-size: 20px;
+}
+
+.kpi-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--neutral-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.kpi-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--neutral-dark);
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+
+.kpi-sub {
+  font-size: 11.5px;
+  color: var(--neutral-muted);
+}
+
+/* Commodity Stock Cards Grid */
+.stock-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 18px;
+}
+
+.stock-card {
+  background: var(--surface);
+  border: 1px solid var(--neutral-border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.stock-card:hover {
+  border-color: #BDBDBD;
+  box-shadow: var(--shadow-md);
+}
+
+.stock-card.critical {
+  border-color: #FFCDD2;
+  background: #FFFBFB;
+}
+
+.stock-card.warning {
+  border-color: #FFE082;
+  background: #FFFDF7;
+}
+
+.stock-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.stock-name-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stock-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: #FFF3E0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.stock-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--neutral-dark);
+}
+
+.stock-source-tag {
+  font-size: 11px;
+  color: var(--neutral-muted);
+  display: block;
+}
+
+.stock-status-pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.status-safe {
+  background: #E8F5E9;
+  color: #2E7D32;
+  border: 1px solid #C8E6C9;
+}
+
+.status-warning {
+  background: #FFF8E1;
+  color: #F57F17;
+  border: 1px solid #FFE082;
+}
+
+.status-critical {
+  background: #FFEBEE;
+  color: #C62828;
+  border: 1px solid #FFCDD2;
+}
+
+/* Balance & Thresholds */
+.stock-balance-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.stock-balance-num {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--neutral-dark);
+}
+
+.stock-unit {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--neutral-muted);
+  margin-left: 4px;
+}
+
+.stock-reorder-text {
+  font-size: 11.5px;
+  color: var(--neutral-muted);
+}
+
+/* Progress Meter */
+.stock-meter {
+  height: 8px;
+  background: #E2E8F0;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.stock-meter-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.4s ease;
+}
+
+.stock-meter-fill.safe { background: #2E7D32; }
+.stock-meter-fill.warning { background: #F57F17; }
+.stock-meter-fill.critical { background: #D32F2F; }
+
+/* Quick Action inside Stock Card */
+.stock-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid #F1F5F9;
+}
+
+.stock-monthly-stat {
+  font-size: 11.5px;
+  color: var(--neutral-muted);
+}
+
+.stock-card-btn {
+  background: none;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--primary);
+}
+
+.stock-card-btn:hover {
+  background: #FFF3E0;
+  border-color: #FFB74D;
+}
+
+/* Ledger Filters */
+.ledger-filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-search-box {
+  width: 240px;
+}
+
+/* Banner Alert Container */
+.banner-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 12px 24px 0;
+}
+
+.alert-banner {
+  background: #FFEBEE;
+  border: 1px solid #EF9A9A;
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #B71C1C;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.alert-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+}
+
+.alert-banner-icon {
+  font-size: 20px;
+}
+
+/* ==========================================================================
+   Full Month Date-Wise Bhandar Panji Table & Holiday Badges
+   ========================================================================== */
+.panji-register-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+}
+
+.panji-register-table th {
+  padding: 10px 8px;
+  background: #FFF3E0;
+  color: #BF360C;
+  font-weight: 700;
+  border: 1px solid #CBD5E1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.panji-register-table td {
+  padding: 8px 10px;
+  border: 1px solid #E2E8F0;
+  vertical-align: middle;
+}
+
+.row-sunday {
+  background-color: #FFF1F2 !important;
+}
+
+.row-sunday:hover {
+  background-color: #FFE4E6 !important;
+}
+
+.row-holiday {
+  background-color: #FEF3C7 !important;
+}
+
+.row-holiday:hover {
+  background-color: #FDE68A !important;
+}
+
+.row-feeding:hover {
+  background-color: #F8FAFC !important;
+}
+
+.badge-sunday {
+  background: #FFE4E6;
+  color: #BE123C;
+  border: 1px solid #FDA4AF;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+}
+
+.badge-holiday {
+  background: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FCD34D;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+}
+
+.badge-feeding {
+  background: #DCFCE7;
+  color: #166534;
+  border: 1px solid #86EFAC;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+}
+
+.qty-circle {
+  display: inline-block;
+  min-width: 28px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  background: #E0F2FE;
+  color: #0369A1;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 0 6px;
+  font-size: 12px;
+}
+
+/* Bulk Stock Modal Styling - Spacious & Zero Overflow */
+.modal-container-lg {
+  max-width: 880px !important;
+  width: 95% !important;
+  max-height: 88vh !important;
+}
+
+.commodity-input-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+  box-sizing: border-box;
+}
+
+.commodity-input-card {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all var(--transition-fast);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.commodity-input-card:focus-within {
+  border-color: var(--primary);
+  background: #FFF;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
+}
+
+.commodity-input-card .comm-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--neutral-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.commodity-input-card .comm-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.commodity-input-card .comm-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 6px 10px;
+  border: 1px solid #CBD5E1;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: right;
+  box-sizing: border-box;
+}
+
+.commodity-input-card .comm-unit {
+  font-size: 11.5px;
+  color: var(--neutral-muted);
+  font-weight: 700;
+  flex: 0 0 44px;
+  width: 44px;
+  text-align: left;
+}
+
+/* ==========================================================================
+   All Stock Balance Summary Bar & Inline Edit Styles
+   ========================================================================== */
+.stock-summary-container {
+  background: var(--surface);
+  border: 1px solid var(--neutral-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.stock-summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.stock-summary-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--neutral-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stock-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  gap: 10px;
+}
+
+.stock-summary-card {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stock-summary-card:hover {
+  background: #F1F5F9;
+}
+
+.stock-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--neutral-dark);
+}
+
+.stock-card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: var(--neutral-muted);
+}
+
+.stock-card-balance {
+  font-size: 13px;
+  font-weight: 800;
+  color: #166534;
+}
+
+.panji-child-edit {
+  width: 52px;
+  height: 28px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 13px;
+  border: 1px solid #CBD5E1;
+  border-radius: 4px;
+  background: #FFFFFF;
+  color: #0F172A;
+  transition: all var(--transition-fast);
+}
+
+.panji-child-edit:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
+  background: #EEF2FF;
+}
+
+.btn-holiday-toggle {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-holiday-toggle:hover {
+  filter: brightness(0.95);
+}
+
+/* Two-tier Table Sub-Columns (USE & Balance) as per user's sketch */
+.cell-use {
+  text-align: right;
+  font-weight: 600;
+  color: #334155;
+  background-color: #FAFAFA;
+  white-space: nowrap;
+  padding: 6px 8px !important;
+  font-size: 12px;
+}
+
+.cell-balance {
+  text-align: right;
+  font-weight: 700;
+  color: #15803D;
+  background-color: #F0FDF4;
+  white-space: nowrap;
+  padding: 6px 8px !important;
+  font-size: 12px;
+}
+
+.th-commodity-group {
+  text-align: center;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 8px 4px !important;
+  border-left: 2px solid #64748B !important;
+}
+
+.th-sub-use {
+  font-size: 10.5px;
+  font-weight: 700;
+  background: #FEF3C7 !important;
+  color: #92400E !important;
+  padding: 5px 6px !important;
+  text-align: center;
+  white-space: nowrap;
+  border-left: 2px solid #CBD5E1 !important;
+}
+
+.th-sub-bal {
+  font-size: 10.5px;
+  font-weight: 700;
+  background: #DCFCE7 !important;
+  color: #166534 !important;
+  padding: 5px 6px !important;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* 1. Freeze First Columns (तारीख & दिन) - Completely Rigid Zero-Movement */
+.panji-register-table th.sticky-col-1,
+.panji-register-table td.sticky-col-1 {
+  position: sticky;
+  left: 0 !important;
+  width: 70px !important;
+  min-width: 70px !important;
+  max-width: 70px !important;
+  box-sizing: border-box !important;
+  z-index: 10;
+  background-color: #FFFFFF;
+  border-right: 1px solid #CBD5E1 !important;
+  text-align: center;
+  padding: 8px 4px !important;
+  white-space: nowrap !important;
+}
+
+.panji-register-table th.sticky-col-2,
+.panji-register-table td.sticky-col-2 {
+  position: sticky;
+  left: 70px !important; /* EXACT 70px = NO SHIFT/JUMP WHEN SCROLLING LEFT/RIGHT */
+  width: 80px !important;
+  min-width: 80px !important;
+  max-width: 80px !important;
+  box-sizing: border-box !important;
+  z-index: 10;
+  background-color: #FFFFFF;
+  border-right: 2px solid #475569 !important;
+  box-shadow: -1px 0 0 0 #CBD5E1, 4px 0 8px -2px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  padding: 8px 4px !important;
+  white-space: nowrap !important;
+}
+
+/* Header sticky styling */
+.panji-register-table thead th.sticky-col-1 {
+  z-index: 30 !important;
+  background-color: #0F172A !important;
+  color: #FFFFFF !important;
+  border-right: 1px solid #334155 !important;
+}
+
+.panji-register-table thead th.sticky-col-2 {
+  z-index: 30 !important;
+  background-color: #0F172A !important;
+  color: #FFFFFF !important;
+  border-right: 2px solid #64748B !important;
+  box-shadow: -1px 0 0 0 #334155, 4px 0 8px -2px rgba(0, 0, 0, 0.35);
+}
+
+/* Footer sticky styling */
+.panji-register-table tfoot td.sticky-col-1 {
+  z-index: 20 !important;
+  border-right: 1px solid #334155 !important;
+}
+
+.panji-register-table tfoot td.sticky-col-2 {
+  z-index: 20 !important;
+  border-right: 2px solid #64748B !important;
+  box-shadow: -1px 0 0 0 #334155, 4px 0 8px -2px rgba(0, 0, 0, 0.25);
+}
+
+/* Row-specific sticky backgrounds */
+.panji-register-table tr.row-sunday td.sticky-col-1,
+.panji-register-table tr.row-sunday td.sticky-col-2 {
+  background-color: #FFF1F2 !important;
+}
+
+.panji-register-table tr.row-holiday td.sticky-col-1,
+.panji-register-table tr.row-holiday td.sticky-col-2 {
+  background-color: #FEF3C7 !important;
+}
+
+.panji-register-table tr.row-feeding:hover td.sticky-col-1,
+.panji-register-table tr.row-feeding:hover td.sticky-col-2 {
+  background-color: #F1F5F9 !important;
+}
+
+.panji-register-table tr.row-sunday:hover td.sticky-col-1,
+.panji-register-table tr.row-sunday:hover td.sticky-col-2 {
+  background-color: #FFE4E6 !important;
+}
+
+.panji-register-table tr.row-holiday:hover td.sticky-col-1,
+.panji-register-table tr.row-holiday:hover td.sticky-col-2 {
+  background-color: #FDE68A !important;
+}
+
+/* 2. Low Stock & Depleted/Negative Balance Alerts */
+.cell-balance-danger {
+  background-color: #FEE2E2 !important;
+  color: #B91C1C !important;
+  font-weight: 800 !important;
+  border-left: 2px solid #EF4444 !important;
+}
+
+.cell-balance-warning {
+  background-color: #FEF3C7 !important;
+  color: #B45309 !important;
+  font-weight: 700 !important;
+  border-left: 2px solid #F59E0B !important;
+}
+
+
+
+

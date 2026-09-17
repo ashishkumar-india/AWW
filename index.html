@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#4F46E5">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="बिहार समेकित बाल विकास सेवाएं (ICDS) - आंगनवाड़ी सेविका मालती कुमारी (केंद्र 201) की दैनिक भंडार पंजी (पंजी 8) प्रबंधन प्रणाली">
+  <title>आंगनवाड़ी दैनिक भंडार पंजी | बिहार सेविका (ICDS)</title>
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <!-- Fix #12: Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%234F46E5'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-size='50'>📖</text></svg>">
+  
+  <!-- Google Fonts: Outfit & Noto Sans Devanagari -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css?v=20260917_14">
+  <link rel="stylesheet" href="css/inventory.css?v=20260917_14">
+
+  <link rel="stylesheet" href="css/responsive.css?v=20260917_14">
+</head>
+<body>
+  <!-- Header: Android Mobile AppBar -->
+  <header class="app-header no-print">
+    <div class="header-container">
+      <div class="brand-section">
+        <span class="brand-avatar">📖</span>
+        <div class="brand-text">
+          <h1 class="brand-title">आंगनवाड़ी भंडार डायरी</h1>
+          <div class="brand-sub">सेविका: मालती कुमारी | केंद्र 201 (कोड: 201)</div>
+        </div>
+      </div>
+
+      <!-- Header Quick Controls -->
+      <div class="header-actions">
+        <!-- Quick Menu View -->
+        <button id="btnHeaderMenuShortcut" class="btn btn-secondary btn-header-icon" title="साप्ताहिक मेनू देखें">
+          <span class="icon">📋</span>
+          <span class="btn-text-sm">मेनू</span>
+        </button>
+
+        <!-- Language Switcher -->
+        <button id="langToggleBtn" class="btn btn-secondary btn-lang" title="Switch Language">
+          <span class="icon">🌐</span>
+          <span id="langLabel">English</span>
+        </button>
+
+        <!-- Centre Quick Info Pill -->
+        <div class="centre-pill" id="centreQuickInfo" title="AWC Details / Settings">
+          <div class="pill-dot"></div>
+          <div>
+            <div class="pill-title" id="pillAwcName">मालती कुमारी - केंद्र 201</div>
+            <div class="pill-sub" id="pillAwcCode">कोड: 201</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Notification Banner (Alerts - hidden for personal clean use) -->
+  <div id="statusBannerContainer" class="banner-container no-print" style="display:none;"></div>
+
+  <!-- MAIN VIEW CONTAINER -->
+  <main class="main-content" id="mainContent">
+
+    <!-- VIEW: SEVIKA HOME DASHBOARD (Android APK Style) -->
+    <section id="viewDashboard" class="view-section active">
+      <!-- 1. Hero Greeting & Profile Card -->
+      <div class="dash-hero-card">
+        <div class="dash-hero-content">
+          <div class="dash-hero-avatar">👩‍💼</div>
+          <div class="dash-hero-details">
+            <div class="dash-greeting-badge">
+              <span class="dash-pulse-dot"></span>
+              <span>आंगनवाड़ी केंद्र सक्रिय (सुचारू)</span>
+            </div>
+            <h2 class="dash-hero-title" id="dashHeroTitle">नमस्ते, मालती कुमारी जी! 🙏</h2>
+            <div class="dash-hero-subtitle">
+              <span>📍 केंद्र: <strong id="dashAwcName">दरियापुर - केंद्र 201</strong></span>
+              <span class="dash-dot-sep">•</span>
+              <span>🏷️ कोड: <strong id="dashAwcCode">201</strong></span>
+              <span class="dash-dot-sep">•</span>
+              <span>सारण (बिहार)</span>
+            </div>
+            <div class="dash-hero-date" id="dashTodayDateDisplay">
+              📅 आज: गुरुवार, 17 सितंबर 2026
+            </div>
+          </div>
+        </div>
+        <div class="dash-hero-stats">
+          <div class="dash-stat-pill">
+            <span class="stat-num" id="dashChildCount">35</span>
+            <span class="stat-label">पंजीकृत बच्चे (3-6 वर्ष)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Today's Live HCM Meal & Snack Card -->
+      <div class="dash-card dash-today-meal-card">
+        <div class="dash-card-header">
+          <div class="dash-card-title-group">
+            <span class="dash-card-icon">🍲</span>
+            <div>
+              <h3 class="dash-card-title">आज का निर्धारित गर्म भोजन व नाश्ता (ICDS मेनू)</h3>
+              <p class="dash-card-subtitle" id="dashTodayDaySubtitle">बिहार सरकार आधिकारिक साप्ताहिक मेनू अनुसार</p>
+            </div>
+          </div>
+          <span class="badge badge-success" id="dashTodayDayBadge">आज: गुरुवार</span>
+        </div>
+        
+        <div class="dash-meal-content">
+          <div class="dash-meal-grid">
+            <div class="dash-meal-box dash-meal-main">
+              <div class="dash-meal-type">
+                <span class="meal-icon">🍛</span>
+                <span>दोपहर का गर्म पका भोजन (HCM)</span>
+              </div>
+              <div class="dash-meal-name" id="dashTodayMealName">रसियाव (गुड़ खीर)</div>
+              <div class="dash-meal-items" id="dashTodayMealItems">
+                चावल 60g, गुड़ 30g, मूंगफली 15g प्रति बच्चा
+              </div>
+            </div>
+
+            <div class="dash-meal-box dash-meal-snack">
+              <div class="dash-meal-type">
+                <span class="meal-icon">🥛</span>
+                <span>सुबह का पौष्टिक नाश्ता</span>
+              </div>
+              <div class="dash-meal-name" id="dashTodaySnackName">केला / मौसमी फल + सुधा दूध (200g पैकेट)</div>
+              <div class="dash-meal-items" id="dashTodaySnackItems">
+                35 बच्चों हेतु 1.75 पैकेट (0.35 kg) दूध पाउडर + फल
+              </div>
+            </div>
+          </div>
+
+          <!-- 35 Children Estimated Consumption Banner -->
+          <div class="dash-req-banner" id="dashTodayReqBanner">
+            <span class="req-title">📊 35 बच्चों हेतु आज का अनुमानित राशन कोटा:</span>
+            <div class="req-chips" id="dashTodayReqChips">
+              <!-- Dynamically populated chips in app.js -->
+            </div>
+          </div>
+
+          <div class="dash-meal-footer">
+            <button class="btn btn-primary" id="btnDashTodayHcm">
+              <span class="btn-icon">🍲</span>
+              <span>आज का भोजन दर्ज करें (दैनिक HCM)</span>
+            </button>
+            <button class="btn btn-secondary" id="btnDashViewFullMenu">
+              <span class="btn-icon">📋</span>
+              <span>पूरा 6-दिवसीय मेनू देखें</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Quick Action Grid (6 Touch APK Action Tiles) -->
+      <div class="dash-section-header">
+        <div class="dash-section-title">
+          <span class="sec-icon">⚡</span>
+          <span>त्वरित कार्य (Quick Actions)</span>
+        </div>
+      </div>
+      <div class="dash-actions-grid">
+        <button class="dash-action-tile tile-bulk" id="btnDashTileBulkStock">
+          <div class="tile-icon-wrap">📦</div>
+          <div class="tile-text">
+            <div class="tile-title">माह का पूरा स्टॉक</div>
+            <div class="tile-sub">प्रारंभिक राशन व 200g दूध पैकेट दर्ज करें</div>
+          </div>
+          <span class="tile-arrow">➔</span>
+        </button>
+
+        <button class="dash-action-tile tile-panji" id="btnDashTilePanji">
+          <div class="tile-icon-wrap">📅</div>
+          <div class="tile-text">
+            <div class="tile-title">35 बच्चों का दैनिक रजिस्टर</div>
+            <div class="tile-sub">भंडार पंजी-8 (दैनिक उपस्थिति व राशन)</div>
+          </div>
+          <span class="tile-arrow">➔</span>
+        </button>
+
+        <button class="dash-action-tile tile-inward" id="btnDashTileInward">
+          <div class="tile-icon-wrap">📥</div>
+          <div class="tile-text">
+            <div class="tile-title">नया स्टॉक आवक</div>
+            <div class="tile-sub">SFC गोदाम या समिति से राशन प्राप्ति</div>
+          </div>
+          <span class="tile-arrow">➔</span>
+        </button>
+
+        <button class="dash-action-tile tile-hcm" id="btnDashTileHcm">
+          <div class="tile-icon-wrap">🍲</div>
+          <div class="tile-text">
+            <div class="tile-title">दैनिक HCM भोजन</div>
+            <div class="tile-sub">दैनिक बच्चों की उपस्थिति व खपत दर्ज</div>
+          </div>
+          <span class="tile-arrow">➔</span>
+        </button>
+
+
+
+        <button class="dash-action-tile tile-backup" id="btnDashTileBackup">
+          <div class="tile-icon-wrap">💾</div>
+          <div class="tile-text">
+            <div class="tile-title">सुरक्षित बैकअप</div>
+            <div class="tile-sub">मोबाइल में पूरा डेटा एक क्लिक में सुरक्षित रखें</div>
+          </div>
+          <span class="tile-arrow">➔</span>
+        </button>
+      </div>
+
+      <!-- 4. Live Stock Glance (राशन भंडार एक नज़र में) -->
+      <div class="dash-section-header">
+        <div class="dash-section-title">
+          <span class="sec-icon">📦</span>
+          <span>राशन भंडार - लाइव स्थिति (Stock Balance)</span>
+        </div>
+        <button class="btn btn-text-link" id="btnDashGoToStockLedger">
+          <span>विस्तृत स्टॉक लेजर देखें ➔</span>
+        </button>
+      </div>
+      
+      <div class="dash-stock-glance-grid" id="dashLiveStockGlanceGrid">
+        <!-- Dynamically rendered stock cards with packets + kg for milk in app.js -->
+      </div>
+
+      <!-- 5. Monthly Feeding & Holiday Progress -->
+      <div class="dash-card dash-progress-card">
+        <div class="dash-card-header">
+          <div class="dash-card-title-group">
+            <span class="dash-card-icon">📊</span>
+            <div>
+        <!-- Fix #9: id added so JS can update month name dynamically -->
+              <h3 class="dash-card-title" id="dashProgressMonthTitle">माह सितंबर 2026 - प्रगति संक्षेप</h3>
+              <p class="dash-card-subtitle">कार्य दिवस, अवकाश एवं पोषाहार वितरण</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-progress-stats-grid">
+          <div class="dash-stat-box">
+            <span class="stat-icon">📅</span>
+            <div class="stat-val" id="dashTotalFeedingDays">24 दिन</div>
+            <div class="stat-lbl">पोषाहार वितरण दिवस</div>
+          </div>
+          <div class="dash-stat-box">
+            <span class="stat-icon">🏖️</span>
+            <div class="stat-val" id="dashTotalHolidays">6 दिन</div>
+            <div class="stat-lbl">रविवार व पर्व अवकाश</div>
+          </div>
+          <div class="dash-stat-box">
+            <span class="stat-icon">🥛</span>
+            <div class="stat-val" id="dashTotalMilkPacketsUsed">--</div>
+            <div class="stat-lbl">दूध पैकेट वितरित (200g)</div>
+          </div>
+          <div class="dash-stat-box">
+            <span class="stat-icon">🥚</span>
+            <div class="stat-val" id="dashTotalEggsUsed">--</div>
+            <div class="stat-lbl">अंडे वितरित (संख्या)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: RATION & NUTRITION INVENTORY (पंजी 8) -->
+    <section id="viewInventory" class="view-section">
+      <!-- Inventory Overview & Action Toolbar -->
+      <div class="view-header">
+        <div class="header-left">
+          <h2 class="view-title">राशन एवं पोषाहार भंडार (पंजी-8)</h2>
+          <p class="view-desc">दैनिक भोजन (HCM), नाश्ता एवं टेक होम राशन (THR) के स्टॉक की आवक व खपत लेजर</p>
+        </div>
+        <div class="action-buttons-group">
+          <button class="btn btn-primary" id="btnOpenBulkStockModal">
+            <span class="btn-icon">📦</span>
+            <span>माह का पूरा स्टॉक जोड़ें</span>
+          </button>
+          <button class="btn btn-secondary" id="btnOpenInwardModal">
+            <span class="btn-icon">📥</span>
+            <span>स्टॉक आवक</span>
+          </button>
+          <button class="btn btn-secondary" id="btnOpenDailyHcmModal">
+            <span class="btn-icon">🍲</span>
+            <span>दैनिक HCM</span>
+          </button>
+          <button class="btn btn-secondary" id="btnOpenThrModal">
+            <span class="btn-icon">📦</span>
+            <span>THR वितरण</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Summary Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-saffron">
+          <div class="kpi-header">
+            <span class="kpi-icon">🌾</span>
+            <span class="kpi-tag" data-i18n="kpiRiceStock">SFC खाद्यान्न</span>
+          </div>
+          <div class="kpi-value" id="kpiRiceVal">--</div>
+          <div class="kpi-sub" data-i18n="kpiRiceSub">चावल का उपलब्ध स्टॉक</div>
+        </div>
+
+        <div class="kpi-card kpi-emerald">
+          <div class="kpi-header">
+            <span class="kpi-icon">🥣</span>
+            <span class="kpi-tag" data-i18n="kpiDalStock">दाल व प्रोटीन</span>
+          </div>
+          <div class="kpi-value" id="kpiDalVal">--</div>
+          <div class="kpi-sub" data-i18n="kpiDalSub">मसूर/अरहर दाल शेष</div>
+        </div>
+
+        <div class="kpi-card kpi-amber">
+          <div class="kpi-header">
+            <span class="kpi-icon">🥚</span>
+            <span class="kpi-tag" data-i18n="kpiEggStock">बुध/शुक्रवार अंडा</span>
+          </div>
+          <div class="kpi-value" id="kpiEggVal">--</div>
+          <div class="kpi-sub" data-i18n="kpiEggSub">उपलब्ध अंडों की संख्या</div>
+        </div>
+
+        <div class="kpi-card kpi-red">
+          <div class="kpi-header">
+            <span class="kpi-icon">⚠️</span>
+            <span class="kpi-tag" data-i18n="kpiLowStock">निम्न स्टॉक चेतावनी</span>
+          </div>
+          <div class="kpi-value" id="kpiAlertsVal">0</div>
+          <div class="kpi-sub" data-i18n="kpiAlertsSub">सामग्रियां न्यूनतम स्तर से कम</div>
+        </div>
+      </div>
+
+      <!-- Live Stock Grid (Commodity Cards) -->
+      <div class="section-card">
+        <div class="section-card-header">
+          <div>
+            <h3 class="section-title" data-i18n="liveStockTitle">लाइव स्टॉक स्थिति (बिहार ICDS अनुमत सामग्री)</h3>
+            <span class="section-sub" data-i18n="liveStockSub">मासिक उपभोग एवं पुनः मांग सीमा के साथ</span>
+          </div>
+          <div class="filter-search-box">
+            <input type="text" id="stockSearchInput" class="form-input" placeholder="सामग्री खोजें (Search)...">
+          </div>
+        </div>
+
+        <!-- Stock Cards Container -->
+        <div class="stock-cards-grid" id="stockCardsContainer">
+          <!-- Dynamically populated from JS -->
+        </div>
+      </div>
+
+      <!-- Transaction Ledger / पंजी 8 विवरण -->
+      <div class="section-card">
+        <div class="section-card-header">
+          <div>
+            <h3 class="section-title" data-i18n="ledgerTitle">पंजी-8: भंडार आवक-खपत लेजर विवरण</h3>
+            <span class="section-sub" data-i18n="ledgerSub">तारीखवार सभी प्राप्तियां एवं वितरण अभिलेख</span>
+          </div>
+          <div class="ledger-filters">
+            <select id="ledgerTypeFilter" class="form-select">
+              <option value="all" data-i18n="filterAll">सभी लेन-देन (All Transactions)</option>
+              <option value="inward" data-i18n="filterInward">केवल आवक (Inward / SFC / क्रय)</option>
+              <option value="hcm" data-i18n="filterHcm">दैनिक भोजन खपत (HCM)</option>
+              <option value="thr" data-i18n="filterThr">टेक होम राशन (THR)</option>
+            </select>
+            <button class="btn btn-outline" id="btnExportLedgerCsv">
+              <span>📥 CSV डाउनलोड</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Transactions Table -->
+        <div class="table-responsive">
+          <table class="data-table" id="transactionsTable">
+            <thead>
+              <tr>
+                <th data-i18n="thDate">तारीख</th>
+                <th data-i18n="thType">प्रकार</th>
+                <th data-i18n="thItem">सामग्री</th>
+                <th data-i18n="thQuantity">मात्रा (Qty)</th>
+                <th data-i18n="thSource">स्रोत / संदर्भ विवरण</th>
+                <th data-i18n="thBeneficiaries">लाभार्थी संख्या</th>
+                <th data-i18n="thAction">कार्रवाई</th>
+              </tr>
+            </thead>
+            <tbody id="transactionsTableBody">
+              <!-- Dynamically populated from JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: FULL MONTH DATE-WISE BHANDAR PANJI (35 CHILDREN & HOLIDAYS) -->
+    <section id="viewAutoPanji" class="view-section">
+      <div class="view-header no-print">
+        <div class="header-left">
+          <h2 class="view-title">दैनिक भंडार पंजी (35 बच्चे व अवकाश)</h2>
+          <p class="view-desc">1 से 30/31 तारीख तक 35 बच्चों का प्रतिदिन का भोजन, दूध/अंडा, रविवार व अवकाश विवरण</p>
+        </div>
+        <div class="action-buttons-group">
+          <!-- Controls -->
+          <div style="display:flex; align-items:center; gap:8px;">
+            <select id="panjiMonthSelect" class="form-select font-bold" style="width:125px;">
+              <option value="9">सितम्बर (Sep)</option>
+              <option value="8">अगस्त (Aug)</option>
+              <option value="7">जुलाई (Jul)</option>
+              <option value="6">जून (Jun)</option>
+              <option value="10">अक्टूबर (Oct)</option>
+              <option value="11">नवम्बर (Nov)</option>
+              <option value="12">दिसम्बर (Dec)</option>
+            </select>
+            <select id="panjiYearSelect" class="form-select font-bold" style="width:85px;">
+              <option value="2026">2026</option>
+              <option value="2025">2025</option>
+            </select>
+            <div style="display:flex; align-items:center; gap:4px;">
+              <label style="font-size:12px; font-weight:700; white-space:nowrap;">बच्चे:</label>
+              <input type="number" id="panjiChildCountInput" class="form-input font-bold" value="35" min="1" max="100" style="width:65px; text-align:center;">
+            </div>
+          </div>
+          <button class="btn btn-primary" id="btnOpenBulkStockFromPanji">
+            <span class="btn-icon">📦</span>
+            <span>माह का पूरा स्टॉक जोड़ें</span>
+          </button>
+          <button class="btn btn-secondary" id="btnOpenAddHolidayModal">
+            <span class="btn-icon">➕</span>
+            <span>छुट्टी जोड़ें</span>
+          </button>
+          <button class="btn btn-secondary" id="btnAutoFillCommit">
+            <span class="btn-icon">⚡</span>
+            <span>लेजर में सेव करें</span>
+          </button>
+          <button class="btn btn-secondary" id="btnPrintPanji">
+            <span class="btn-icon">🖨️</span>
+            <span>प्रिंट</span>
+          </button>
+          <button class="btn btn-secondary" id="btnExportPanjiCsv">
+            <span class="btn-icon">📊</span>
+            <span>Excel</span>
+          </button>
+          <button class="btn btn-secondary" id="btnQuickBackup" title="सुरक्षित बैकअप डाउनलोड करें (One-Click Backup)">
+            <span class="btn-icon">💾</span>
+            <span>बैकअप</span>
+          </button>
+          <button class="btn btn-secondary" id="btnQuickRestore" title="बैकअप फाइल से डेटा रीस्टोर करें">
+            <span class="btn-icon">📂</span>
+            <span>रीस्टोर</span>
+          </button>
+          <input type="file" id="quickBackupFileInput" accept=".json" style="display:none;">
+        </div>
+      </div>
+
+      <!-- Monthly Summary KPI Bar -->
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-saffron">
+          <div class="kpi-header">
+            <span class="kpi-icon">📅</span>
+            <span class="kpi-tag">माह के कुल दिन</span>
+          </div>
+          <div class="kpi-value" id="panjiTotalDays">30 दिन</div>
+          <div class="kpi-sub">कैलेंडर कुल दिवस</div>
+        </div>
+        <div class="kpi-card kpi-red">
+          <div class="kpi-header">
+            <span class="kpi-icon">🚫</span>
+            <span class="kpi-tag">छुट्टी / अवकाश</span>
+          </div>
+          <div class="kpi-value" id="panjiHolidays">5 दिन</div>
+          <div class="kpi-sub">रविवार व राजकीय अवकाश</div>
+        </div>
+        <div class="kpi-card kpi-emerald">
+          <div class="kpi-header">
+            <span class="kpi-icon">🍲</span>
+            <span class="kpi-tag">पोषाहार दिवस</span>
+          </div>
+          <div class="kpi-value" id="panjiFeedingDays" style="color:#1B5E20;">25 दिन</div>
+          <div class="kpi-sub">बिहार 25-दिवसीय लक्ष्य पूर्ण</div>
+        </div>
+        <div class="kpi-card kpi-amber">
+          <div class="kpi-header">
+            <span class="kpi-icon">🥛</span>
+            <span class="kpi-tag">दूध एवं अंडा</span>
+          </div>
+          <div class="kpi-value"><span id="panjiMilkTotal">28 L</span> / <span id="panjiEggsTotal">280</span></div>
+          <div class="kpi-sub">मंगल/गुरु दूध & बुध/शुक्र अंडा</div>
+        </div>
+      </div>
+
+      <!-- Live Generated Table Container -->
+      <div class="section-card">
+        <div class="section-card-header">
+          <div>
+            <h3 class="section-title">दैनिक भंडार पंजी (पंजी-8) - तारीखवार प्रविष्टि</h3>
+            <span class="section-sub">दरियापुर (सारण) मेनू के अनुसार 35 बच्चों की निर्धारित मात्रा, दूध, अंडा व दैनिक अवशेष</span>
+          </div>
+        </div>
+        <div id="monthlyRegisterTableContainer" class="table-responsive">
+          <!-- Dynamically populated from JS -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- VIEW 3: BIHAR WEEKLY MENU & STANDARDS (दरियापुर, सारण आधिकारिक मेनू) -->
+    <section id="viewBiharMenu" class="view-section">
+      <div class="view-header">
+        <div class="header-left">
+          <div class="brand-badge" style="background:#E8F5E9; color:#1B5E20; border-color:#A5D6A7;">आधिकारिक तालिका: परियोजना: दरियापुर (सारण)</div>
+          <h2 class="view-title" data-i18n="menuTitle">साप्ताहिक पोषाहार-मेनू (स्कूल पूर्व शिक्षा में नामांकित बच्चों के लिए)</h2>
+          <p class="view-desc" data-i18n="menuDesc">समेकित बाल विकास सेवाएं (ICDS) - समाज कल्याण विभाग, बिहार | कुल संचालन: 25 दिवस</p>
+        </div>
+      </div>
+
+      <!-- Authentic Dariyapur (Saran) Flex Table Replica -->
+      <div class="section-card" style="border-top: 4px solid #D84315; padding: 24px;">
+        <div style="text-align:center; margin-bottom: 20px;">
+          <h2 style="font-size: 22px; color: #BF360C; font-weight: 800; margin-bottom: 4px;">
+            परियोजना: दरियापुर (सारण)
+          </h2>
+          <h3 style="font-size: 18px; color: #1B5E20; font-weight: 700;">
+            साप्ताहिक पोषाहार-मेनू
+          </h3>
+          <p style="font-size: 14px; color: #E65100; font-weight: 600;">
+            स्कूल पूर्व शिक्षा में नामांकित बच्चों के लिए (3 से 6 वर्ष)
+          </p>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table" style="border: 2px solid #CBD5E1;">
+            <thead>
+              <tr style="background: #FFF3E0; color: #BF360C; font-size: 14.5px;">
+                <th style="border: 1px solid #CBD5E1; text-align:center; width: 12%;">दिन</th>
+                <th style="border: 1px solid #CBD5E1; text-align:center; width: 24%;">नाश्ता</th>
+                <th style="border: 1px solid #CBD5E1; text-align:center; width: 22%; background: #FFE0B2; color: #D84315;">नाश्ता के अतिरिक्त</th>
+                <th style="border: 1px solid #CBD5E1; text-align:center; width: 28%;">गर्म पका भोजन</th>
+                <th style="border: 1px solid #CBD5E1; text-align:center; width: 14%; background: #FFF8E1; color: #E65100;">महीना में दिनों की संख्या</th>
+              </tr>
+            </thead>
+            <tbody style="font-size: 14px;">
+              <tr>
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:center; background:#F8FAFC;">सोमवार</td>
+                <td style="border: 1px solid #CBD5E1;">भुना चना और मूंगफली</td>
+                <td style="border: 1px solid #CBD5E1; text-align:center; color: #9E9E9E;">-</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1; color: #2E7D32;">चावल का पुलाव</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:center; font-size:16px;">4</td>
+              </tr>
+              <tr style="background: #F0FDF4;">
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:center;">मंगलवार</td>
+                <td style="border: 1px solid #CBD5E1;">केला, पपीता या मौसमी फल</td>
+                <td style="border: 1px solid #CBD5E1; text-align:center; background:#E8F5E9; font-weight:700; color:#1B5E20;">🥛 दूध</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1;">चना आलू की सब्जी व चावल</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:center; font-size:16px;">4</td>
+              </tr>
+              <tr style="background: #FFFDF7;">
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:center;">बुधवार</td>
+                <td style="border: 1px solid #CBD5E1;">अंकुरित चना, गुड़</td>
+                <td style="border: 1px solid #CBD5E1; text-align:center; background:#FFF3E0; font-weight:700; color:#E65100;">🥚 अंडा / भुना मूंगफली</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1;">सोयाबीन की सब्जी व चावल</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:center; font-size:16px;">4</td>
+              </tr>
+              <tr style="background: #F0FDF4;">
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:center;">गुरुवार</td>
+                <td style="border: 1px solid #CBD5E1;">केला, पपीता या मौसमी फल</td>
+                <td style="border: 1px solid #CBD5E1; text-align:center; background:#E8F5E9; font-weight:700; color:#1B5E20;">🥛 दूध</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1; color:#BF360C;">रसियाव</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:center; font-size:16px;">4</td>
+              </tr>
+              <tr style="background: #FFFDF7;">
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:center;">शुक्रवार</td>
+                <td style="border: 1px solid #CBD5E1;">मौसमी फल</td>
+                <td style="border: 1px solid #CBD5E1; text-align:center; background:#FFF3E0; font-weight:700; color:#E65100;">🥚 अंडा / भुना मूंगफली</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1;">कद्दू दाल / साग दाल व चावल</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:center; font-size:16px;">4</td>
+              </tr>
+              <tr>
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:center; background:#F8FAFC;">शनिवार</td>
+                <td style="border: 1px solid #CBD5E1;">केला, पपीता या मौसमी फल</td>
+                <td style="border: 1px solid #CBD5E1; text-align:center; color: #9E9E9E;">-</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1; color: #1565C0;">चावल दाल की खिचड़ी</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:center; font-size:16px;">4</td>
+              </tr>
+              <tr style="background: #FFF8E1;">
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:center;">एक अतिरिक्त दिन</td>
+                <td style="border: 1px solid #CBD5E1;" colspan="3">माह के 25 दिन पूर्ण करने हेतु निर्धारित पोषाहार</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:center; font-size:16px;">1</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr style="background: #4A148C; color: #FFF; font-size: 16px; font-weight: 800;">
+                <td colspan="4" style="text-align: right; padding: 12px 18px;">कुल दिन (Total Feeding Days):</td>
+                <td style="text-align: center; font-size: 20px; background: #311B92; color: #FFD54F;">25</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <!-- Banner Official Footer & Slogan -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 24px; padding-top: 16px; border-top: 2px dashed #CBD5E1; flex-wrap: wrap; gap: 16px;">
+          <div style="background: #E8F5E9; border-left: 4px solid #2E7D32; padding: 10px 16px; border-radius: 4px;">
+            <p style="font-size: 14px; font-weight: 700; color: #1B5E20; margin: 0;">
+              "सदैव अच्छी सेहत पाना। कुपोषण दूर भगाना है।"
+            </p>
+            <p style="font-size: 12px; color: #558B2F; margin: 2px 0 0 0;">
+              समेकित बाल विकास सेवाएं (ICDS), समाज कल्याण विभाग, बिहार
+            </p>
+          </div>
+
+          <div style="text-align: right;">
+            <p style="font-size: 16px; font-weight: 800; color: #0F172A; margin: 0;">
+              अंजू सिंह
+            </p>
+            <p style="font-size: 13px; font-weight: 600; color: #475569; margin: 2px 0 0 0;">
+              सी.डी.पी.ओ., दरियापुर (सारण)
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: Official HCM Nutrition Breakdown Table (खाद्य पदार्थ, मात्रा gm/ml, ऊर्जा, प्रोटीन) -->
+      <div class="section-card mt-4">
+        <div class="section-card-header">
+          <div>
+            <h3 class="section-title">गर्म पका भोजन हेतु साप्ताहिक मेनू (मात्रा gm/ml एवं पोषण मानक)</h3>
+            <span class="section-sub">प्रति बच्चा दैनिक मानक (ऊर्जा Kcal एवं प्रोटीन gm सहित)</span>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table" style="border: 2px solid #CBD5E1; font-size: 13px;">
+            <thead>
+              <tr style="background: #E8EAF6; color: #1A237E; font-weight: 700;">
+                <th style="border: 1px solid #CBD5E1; text-align:center;">दिवस</th>
+                <th style="border: 1px solid #CBD5E1; text-align:center;">मेनू - दैनिक पोषाहार</th>
+                <th style="border: 1px solid #CBD5E1;">खाद्य पदार्थ</th>
+                <th style="border: 1px solid #CBD5E1; text-align:right;">मात्रा gm/ml</th>
+                <th style="border: 1px solid #CBD5E1; text-align:right;">ऊर्जा Kcal</th>
+                <th style="border: 1px solid #CBD5E1; text-align:right;">प्रोटीन gm</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- सोमवार -->
+              <tr>
+                <td rowspan="7" class="font-bold" style="border: 1px solid #CBD5E1; text-align:center; background:#F8FAFC; vertical-align:middle;">सोमवार</td>
+                <td rowspan="7" style="border: 1px solid #CBD5E1; background:#F8FAFC; vertical-align:middle;">
+                  <div style="font-weight:700; color:#2E7D32;">चावल का पुलाव</div>
+                  <div style="font-size:12px; color:#64748B;">नाश्ता: भुना चना और मूंगफली</div>
+                </td>
+                <td style="border: 1px solid #CBD5E1;">चावल</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">70</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">246.17</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">5.83</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">चना</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">20</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">57.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">4.00</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">मौसम के अनुसार हरी सब्जियां</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">25</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">18.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">2.00</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">तेल</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">5</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">45.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">0.00</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">चना (नाश्ता)</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">20</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">60.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">4.00</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">मूंगफली (नाश्ता)</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">15</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">78.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">3.00</td>
+              </tr>
+              <tr style="background:#FFF3E0; font-weight:700;">
+                <td style="border: 1px solid #CBD5E1; color:#BF360C;">कुल योग:</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">155 gm</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">504.17 Kcal</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">18.83 gm</td>
+              </tr>
+
+              <!-- मंगलवार -->
+              <tr style="border-top:2px solid #94A3B8;">
+                <td rowspan="6" class="font-bold" style="border: 1px solid #CBD5E1; text-align:center; background:#F0FDF4; vertical-align:middle;">मंगलवार</td>
+                <td rowspan="6" style="border: 1px solid #CBD5E1; background:#F0FDF4; vertical-align:middle;">
+                  <div style="font-weight:700;">आलू चना सब्जी व चावल</div>
+                  <div style="font-size:12px; color:#1B5E20; font-weight:600;">नाश्ता: केला/पपीता + दूध (100ml)</div>
+                </td>
+                <td style="border: 1px solid #CBD5E1;">आलू</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">60</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">58.20</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">0.96</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">चना</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">25</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">90.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">4.275</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">चावल</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">70</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">246.17</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">5.83</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">दूध (100ml पानी में घोलकर)</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">1</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">110.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">3.00</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">केला, पपीता या मौसमी फल</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">1</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">-</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">-</td>
+              </tr>
+              <tr style="background:#DCFCE7; font-weight:700;">
+                <td style="border: 1px solid #CBD5E1; color:#166534;">कुल योग:</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">156 gm</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">504.37 Kcal</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">14.07 gm</td>
+              </tr>
+
+              <!-- बुधवार -->
+              <tr style="border-top:2px solid #94A3B8;">
+                <td rowspan="7" class="font-bold" style="border: 1px solid #CBD5E1; text-align:center; background:#FFFDF7; vertical-align:middle;">बुधवार</td>
+                <td rowspan="7" style="border: 1px solid #CBD5E1; background:#FFFDF7; vertical-align:middle;">
+                  <div style="font-weight:700;">सोयाबीन सब्जी व चावल</div>
+                  <div style="font-size:12px; color:#E65100; font-weight:600;">नाश्ता: अंकुरित चना-गुड़ + अंडा/मूंगफली</div>
+                </td>
+                <td style="border: 1px solid #CBD5E1;">सोयाबीन</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">20</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">75.80</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">7.40</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">सब्जी (प्याज + टमाटर + अन्य)</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">25</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">18.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">2.00</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">तेल</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">5</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">45.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">0.00</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">चावल</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">60</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">211.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">5.00</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">अंकुरित चना (नाश्ता)</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">25</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">90.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">4.275</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">गुड़ (नाश्ता)</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">20</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">71.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">0.00</td>
+              </tr>
+              <tr style="background:#FFF8E1; font-weight:700;">
+                <td style="border: 1px solid #CBD5E1; color:#E65100;">कुल योग:</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">155 gm</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">510.80 Kcal</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">18.68 gm</td>
+              </tr>
+
+              <!-- गुरुवार -->
+              <tr style="border-top:2px solid #94A3B8;">
+                <td rowspan="6" class="font-bold" style="border: 1px solid #CBD5E1; text-align:center; background:#F0FDF4; vertical-align:middle;">गुरुवार</td>
+                <td rowspan="6" style="border: 1px solid #CBD5E1; background:#F0FDF4; vertical-align:middle;">
+                  <div style="font-weight:700; color:#BF360C;">रसियाव (गुड़ खीर)</div>
+                  <div style="font-size:12px; color:#1B5E20; font-weight:600;">नाश्ता: केला/पपीता + दूध (100ml)</div>
+                </td>
+                <td style="border: 1px solid #CBD5E1;">चावल (रसियाव)</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">60</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">211.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">5.00</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">गुड़</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">30</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">106.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">1.00</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">मूंगफली</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">15</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">78.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">3.00</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">दूध (100ml पानी में घोलकर)</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">1</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">110.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">3.00</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">केला, पपीता या मौसमी फल</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">1</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">-</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">-</td>
+              </tr>
+              <tr style="background:#DCFCE7; font-weight:700;">
+                <td style="border: 1px solid #CBD5E1; color:#166534;">कुल योग:</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">106 gm</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">505.00 Kcal</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">12.00 gm</td>
+              </tr>
+
+              <!-- शुक्रवार -->
+              <tr style="border-top:2px solid #94A3B8;">
+                <td rowspan="5" class="font-bold" style="border: 1px solid #CBD5E1; text-align:center; background:#FFFDF7; vertical-align:middle;">शुक्रवार</td>
+                <td rowspan="5" style="border: 1px solid #CBD5E1; background:#FFFDF7; vertical-align:middle;">
+                  <div style="font-weight:700;">कद्दू दाल / साग दाल व चावल</div>
+                  <div style="font-size:12px; color:#E65100; font-weight:600;">नाश्ता: मौसमी फल + अंडा/मूंगफली</div>
+                </td>
+                <td style="border: 1px solid #CBD5E1;">चावल</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">70</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">246.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">6.00</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">दाल</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">25</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">81.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">6.00</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">कद्दू / साग</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">100</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">25.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">1.40</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">तेल</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">5</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">45.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">0.00</td>
+              </tr>
+              <tr style="background:#FFF3E0; font-weight:700;">
+                <td style="border: 1px solid #CBD5E1; color:#BF360C;">कुल योग:</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">212 gm</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">505.00 Kcal</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">17.00 gm</td>
+              </tr>
+
+              <!-- शनिवार -->
+              <tr style="border-top:2px solid #94A3B8;">
+                <td rowspan="6" class="font-bold" style="border: 1px solid #CBD5E1; text-align:center; background:#F8FAFC; vertical-align:middle;">शनिवार</td>
+                <td rowspan="6" style="border: 1px solid #CBD5E1; background:#F8FAFC; vertical-align:middle;">
+                  <div style="font-weight:700; color:#1565C0;">चावल दाल की खिचड़ी</div>
+                  <div style="font-size:12px; color:#64748B;">नाश्ता: केला, पपीता या मौसमी फल</div>
+                </td>
+                <td style="border: 1px solid #CBD5E1;">चावल (खिचड़ी)</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">60</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">211.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">5.00</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">दाल (खिचड़ी)</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">20</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">64.80</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">4.80</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">मौसम के अनुसार हरी सब्जियां</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">25</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">18.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">2.00</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">तेल</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">5</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">45.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">0.00</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #CBD5E1;">केला, पपीता या मौसमी फल</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">2</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">220.00</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">6.00</td>
+              </tr>
+              <tr style="background:#E3F2FD; font-weight:700;">
+                <td style="border: 1px solid #CBD5E1; color:#0D47A1;">कुल योग:</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">112 gm</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">558.80 Kcal</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">17.80 gm</td>
+              </tr>
+
+              <!-- अतिरिक्त दिन -->
+              <tr style="background:#FFF8E1; border-top:2px solid #D84315;">
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:center;">एक अतिरिक्त दिन</td>
+                <td colspan="5" style="border: 1px solid #CBD5E1; font-weight:700; color:#B71C1C;">
+                  गर्म पका भोजन नाश्ता में चौमीन, मैगी, खीर पुरी सब्जी इत्यादि (माह के 25 दिन पूर्ण करने हेतु)
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SECTION 3: Official Bihar T.H.R. Ready to Cook Quota Table -->
+      <div class="section-card mt-4" style="border-top: 4px solid #1B5E20;">
+        <div class="section-card-header">
+          <div>
+            <h3 class="section-title">T.H.R. मेनू (प्रति माह प्रति लाभार्थी) रेडी टू कुक सामग्री</h3>
+            <span class="section-sub">आधिकारिक सरकारी दर एवं ग्राम कोटा आवंटन (बिहार सरकार ICDS)</span>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table" style="border: 2px solid #CBD5E1; font-size: 13.5px;">
+            <thead>
+              <tr style="background: #E8F5E9; color: #1B5E20; font-weight: 700;">
+                <th style="border: 1px solid #CBD5E1;">लाभुक की विवरणी</th>
+                <th style="border: 1px solid #CBD5E1; text-align:center;">दर प्रति लाभार्थी प्रतिदिन (रू०)</th>
+                <th style="border: 1px solid #CBD5E1; text-align:center;">कैलोरी</th>
+                <th style="border: 1px solid #CBD5E1; text-align:center;">प्रोटीन (ग्रा०)</th>
+                <th style="border: 1px solid #CBD5E1; text-align:right;">चावल (ग्रा०)</th>
+                <th style="border: 1px solid #CBD5E1; text-align:right;">मूंगदाल (ग्रा०)</th>
+                <th style="border: 1px solid #CBD5E1; text-align:right;">मसाला मिक्स (ग्रा०)</th>
+                <th style="border: 1px solid #CBD5E1; text-align:right;">सोयाबीन (ग्रा०)</th>
+                <th style="border: 1px solid #CBD5E1; text-align:right;">नमक (ग्रा०)</th>
+                <th style="border: 1px solid #CBD5E1; text-align:right;">तेल (ग्रा०)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-bold" style="border: 1px solid #CBD5E1;">6 माह से 3 वर्ष के बच्चे (सामान्य व MAM)</td>
+                <td style="border: 1px solid #CBD5E1; text-align:center;"><span class="qty-pill">8.00</span></td>
+                <td style="border: 1px solid #CBD5E1; text-align:center;">500 Kcal</td>
+                <td style="border: 1px solid #CBD5E1; text-align:center;">12-15</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:right; color:#2E7D32;">1875</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:right; color:#1B5E20;">750</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">12.5</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">500</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">50</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">250</td>
+              </tr>
+              <tr style="background: #FFF5F5;">
+                <td class="font-bold" style="border: 1px solid #CBD5E1; color:#C62828;">6 माह से 3 वर्ष अतिकुपोषित बच्चे (SAM)</td>
+                <td style="border: 1px solid #CBD5E1; text-align:center;"><span class="qty-pill alert-pill font-bold">12.00</span></td>
+                <td style="border: 1px solid #CBD5E1; text-align:center; font-weight:700; color:#C62828;">800 Kcal</td>
+                <td style="border: 1px solid #CBD5E1; text-align:center; font-weight:700; color:#C62828;">20-25</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:right; color:#C62828;">2942.5</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:right; color:#C62828;">1337.5</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">25</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">500</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">75</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">500</td>
+              </tr>
+              <tr style="background: #FDFEFE;">
+                <td class="font-bold" style="border: 1px solid #CBD5E1; color:#0D47A1;">गर्भवती एवं धात्री महिलाएं (PW & LM)</td>
+                <td style="border: 1px solid #CBD5E1; text-align:center;"><span class="qty-pill">9.50</span></td>
+                <td style="border: 1px solid #CBD5E1; text-align:center; font-weight:700; color:#0D47A1;">600 Kcal</td>
+                <td style="border: 1px solid #CBD5E1; text-align:center;">18-20</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:right; color:#0D47A1;">2250</td>
+                <td class="font-bold" style="border: 1px solid #CBD5E1; text-align:right; color:#0D47A1;">1000</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">12.5</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">375</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">62.5</td>
+                <td style="border: 1px solid #CBD5E1; text-align:right;">375</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 4: CENTRE DETAILS & DATA BACKUP SETTINGS -->
+    <section id="viewSettings" class="view-section">
+      <div class="view-header">
+        <div class="header-left">
+          <h2 class="view-title" data-i18n="settingsTitle">आंगनवाड़ी केंद्र विवरण एवं सेटिंग्स</h2>
+          <p class="view-desc" data-i18n="settingsDesc">केंद्र की प्रशासनिक जानकारी अद्यतन करें तथा डाटा बैकअप/रीस्टोर प्रबंधित करें</p>
+        </div>
+      </div>
+
+      <div class="settings-grid">
+        <!-- Centre Profile Form -->
+        <div class="section-card">
+          <h3 class="section-title">केंद्र प्रशासनिक जानकारी</h3>
+          <form id="centreSettingsForm" class="settings-form mt-3">
+            <div class="form-row">
+              <div class="form-group">
+                <label>जिला (District):</label>
+                <input type="text" id="cfgDistrict" class="form-input" value="सारण (Saran)" required>
+              </div>
+              <div class="form-group">
+                <label>प्रखंड / CDPO परियोजना:</label>
+                <input type="text" id="cfgProject" class="form-input" value="दरियापुर (Dariyapur)" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>सेक्टर (Sector):</label>
+                <input type="text" id="cfgSector" class="form-input" value="सेक्टर-02" required>
+              </div>
+              <div class="form-group">
+                <label>पंचायत / वार्ड:</label>
+                <input type="text" id="cfgPanchayat" class="form-input" value="दरियापुर पंचायत" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>केंद्र का नाम:</label>
+                <input type="text" id="cfgAwcName" class="form-input" value="दरियापुर - केंद्र 201" required>
+              </div>
+              <div class="form-group">
+                <label>आंगनवाड़ी केंद्र कोड:</label>
+                <input type="text" id="cfgAwcCode" class="form-input" value="201" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>सेविका का नाम (Sevika):</label>
+                <input type="text" id="cfgSevika" class="form-input" value="मालती कुमारी" required>
+              </div>
+              <div class="form-group">
+                <label>सहायिका का नाम (Sahayika):</label>
+                <input type="text" id="cfgSahayika" class="form-input" value="सुनीता कुमारी" required>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-2">
+              <span>💾 केंद्र विवरण सुरक्षित करें</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Data Backup & Reset Box -->
+        <div class="section-card">
+          <h3 class="section-title">डाटा बैकअप एवं सुरक्षा</h3>
+          <p class="section-sub">आपका संपूर्ण भंडार लेजर एवं दैनिक पंजी आपके इस ब्राउज़र में सुरक्षित रहती है। नए फोन/कंप्यूटर में ले जाने के लिए बैकअप फाइल सुरक्षित रखें।</p>
+
+          <div class="backup-actions-box mt-4">
+            <button class="btn btn-success w-100 mb-2" id="btnDownloadBackup">
+              <span>💾 पूरा डाटा बैकअप डाउनलोड करें (JSON)</span>
+            </button>
+
+            <div class="restore-container mb-3">
+              <label class="btn btn-outline w-100 cursor-pointer">
+                <span>📂 बैकअप फाइल से रीस्टोर करें</span>
+                <input type="file" id="backupFileInput" accept=".json" style="display:none;">
+              </label>
+            </div>
+
+            <hr class="my-3">
+
+            <button class="btn btn-danger-outline w-100" id="btnResetSampleData">
+              <span>🔄 बिहार सैंपल डाटा पुनः लोड करें</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: ADD CUSTOM HOLIDAY (अतिरिक्त छुट्टी जोड़ें) -->
+  <div class="modal-overlay" id="modalAddHoliday">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">🏖️ अतिरिक्त छुट्टी / अवकाश जोड़ें</h3>
+        <button class="modal-close" data-close="modalAddHoliday">&times;</button>
+      </div>
+      <form id="formAddHoliday" class="modal-body">
+        <div class="form-group">
+          <label>तारीख चुनें (Select Date):</label>
+          <input type="date" id="holidayDate" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label>अवकाश का कारण / विवरण (Reason):</label>
+          <input type="text" id="holidayReason" class="form-input" placeholder="उदा. बाढ़ अवकाश (डीएम आदेश)" required list="commonHolidaysList">
+          <datalist id="commonHolidaysList">
+            <option value="अत्यधिक वर्षा / बाढ़ अवकाश (डीएम आदेश)">
+            <option value="अत्यधिक शीत लहर अवकाश (डीएम आदेश)">
+            <option value="लू / अत्यधिक गर्मी अवकाश (डीएम आदेश)">
+            <option value="सेविका मासिक गुरुगोष्ठी / संकुल बैठक">
+            <option value="सेविका प्रशिक्षण (AWW Training)">
+            <option value="स्थानीय पर्व / मेला अवकाश">
+            <option value="केंद्र भवन मरम्मत / रंगाई-पोताई">
+          </datalist>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-close="modalAddHoliday">रद्द करें</button>
+          <button type="submit" class="btn btn-primary" style="background:#DC2626; border-color:#B91C1C;">🚫 छुट्टी दर्ज करें</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: BULK MONTHLY STOCK INWARD & AUTO-PANJI GENERATION (माह का संपूर्ण स्टॉक व 35 बच्चों का ऑटो-रजिस्टर) -->
+  <div class="modal-overlay" id="modalBulkStock">
+    <div class="modal-container modal-container-lg">
+      <div class="modal-header" style="background:#EDE7F6; border-bottom:1px solid #D1C4E9;">
+        <div>
+          <h3 class="modal-title" style="color:#4A148C;">📦 माह का सम्पूर्ण राशन स्टॉक जोड़ें (Bulk Stock Inward)</h3>
+          <span style="font-size:12px; color:#6A1B9A; font-weight:600;">स्टॉक दर्ज होते ही 35 बच्चों का पूरे माह का दैनिक भंडार पंजी (पंजी-8) तारीखवार स्वतः तैयार होगा</span>
+        </div>
+        <button class="modal-close" data-close="modalBulkStock">&times;</button>
+      </div>
+      <form id="formBulkStock" style="display:flex; flex-direction:column; flex:1; min-height:0; overflow:hidden;">
+        <div class="modal-body" style="flex:1; overflow-y:auto; overflow-x:hidden; padding:18px 24px;">
+          <!-- Month & Supply Metadata -->
+          <div class="form-row" style="margin-bottom:12px;">
+            <div class="form-group">
+              <label style="font-weight:700; font-size:13px; color:#1E293B; margin-bottom:4px;">माह व वर्ष (Month & Year):</label>
+              <div style="display:flex; gap:6px;">
+                <select id="bulkStockMonth" class="form-select font-bold">
+                  <option value="9">सितम्बर (September)</option>
+                  <option value="8">अगस्त (August)</option>
+                  <option value="7">जुलाई (July)</option>
+                  <option value="6">जून (June)</option>
+                  <option value="10">अक्टूबर (October)</option>
+                  <option value="11">नवम्बर (November)</option>
+                  <option value="12">दिसम्बर (December)</option>
+                </select>
+                <select id="bulkStockYear" class="form-select font-bold" style="width:95px;">
+                  <option value="2026">2026</option>
+                  <option value="2025">2025</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label style="font-weight:700; font-size:13px; color:#1E293B; margin-bottom:4px;">प्राप्ति तारीख (Stock Arrival Date):</label>
+              <input type="date" id="bulkStockDate" class="form-input" required>
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-bottom:14px;">
+            <div class="form-group">
+              <label style="font-weight:700; font-size:13px; color:#1E293B; margin-bottom:4px;">SFC चालान / रसीद संख्या (Challan No.):</label>
+              <input type="text" id="bulkStockChallan" class="form-input" placeholder="उदा. SFC/SARAN/2026/09/108">
+            </div>
+            <div class="form-group">
+              <label style="font-weight:700; font-size:13px; color:#1E293B; margin-bottom:4px;">पोषाहार उपस्थिति (Children Count):</label>
+              <input type="number" id="bulkStockChildCount" class="form-input font-bold" value="35" min="1" max="100" style="background:#F1F5F9; text-align:center;">
+            </div>
+          </div>
+
+          <!-- 10 Bihar Commodities Grid -->
+          <div style="margin-top:14px; margin-bottom:6px;">
+            <strong style="font-size:13px; color:#1E293B;">बिहार ICDS निर्धारित 10 पोषाहार सामग्रियां (प्राप्त मात्रा भरें):</strong>
+            <span style="font-size:11.5px; color:#64748B; display:block;">(35 बच्चों एवं THR के 25 पोषाहार दिवसों के लिए मानक मात्राएं पूर्व-भरित हैं)</span>
+          </div>
+
+          <div class="commodity-input-grid">
+            <!-- 1. Rice -->
+            <div class="commodity-input-card">
+              <div class="comm-label"><span>🌾</span><span>चावल (Rice - SFC)</span></div>
+              <div class="comm-input-row">
+                <input type="number" id="bulk_rice" class="comm-input" min="0" step="any" value="200" required>
+                <span class="comm-unit">kg</span>
+              </div>
+            </div>
+
+            <!-- 2. Dal -->
+            <div class="commodity-input-card">
+              <div class="comm-label"><span>🥣</span><span>दाल (Lentils - Masoor/Arhar)</span></div>
+              <div class="comm-input-row">
+                <input type="number" id="bulk_dal" class="comm-input" min="0" step="any" value="80" required>
+                <span class="comm-unit">kg</span>
+              </div>
+            </div>
+
+            <!-- 3. Milk (Dry Milk Powder 200g Packet) -->
+            <div class="commodity-input-card" style="border-color:#3B82F6;">
+              <div class="comm-label"><span>🥛</span><span>सूखा दूध पाउडर (Sudha Milk - 200g Pkt)</span></div>
+              <div class="comm-input-row">
+                <input type="number" id="bulk_milk" class="comm-input" min="0" step="any" value="35" required>
+                <span class="comm-unit" style="font-weight:700; color:#1E40AF;">पैकेट</span>
+              </div>
+              <div id="bulkMilkKgCalc" style="font-size:11px; font-weight:700; color:#15803D; margin-top:4px; background:#DCFCE7; padding:2px 6px; border-radius:4px; text-align:center;">
+                💡 35 पैकेट = 7.00 कि.ग्रा. (kg)
+              </div>
+            </div>
+
+            <!-- 4. Eggs -->
+            <div class="commodity-input-card">
+              <div class="comm-label"><span>🥚</span><span>अंडे (Eggs - Wed/Fri)</span></div>
+              <div class="comm-input-row">
+                <input type="number" id="bulk_eggs" class="comm-input" min="0" step="1" value="350" required>
+                <span class="comm-unit">Nos</span>
+              </div>
+            </div>
+
+            <!-- 5. Soybean -->
+            <div class="commodity-input-card">
+              <div class="comm-label"><span>🧆</span><span>सोयाबीन बड़ी (Soybean)</span></div>
+              <div class="comm-input-row">
+                <input type="number" id="bulk_soybean" class="comm-input" min="0" step="any" value="30" required>
+                <span class="comm-unit">kg</span>
+              </div>
+            </div>
+
+            <!-- 6. Chana -->
+            <div class="commodity-input-card">
+              <div class="comm-label"><span>🧆</span><span>चना (Chana - सब्जी व नाश्ता)</span></div>
+              <div class="comm-input-row">
+                <input type="number" id="bulk_chana" class="comm-input" min="0" step="any" value="25" required>
+                <span class="comm-unit">kg</span>
+              </div>
+            </div>
+
+            <!-- 7. Peanut -->
+            <div class="commodity-input-card">
+              <div class="comm-label"><span>🥜</span><span>मूंगफली (Peanuts - नाश्ता)</span></div>
+              <div class="comm-input-row">
+                <input type="number" id="bulk_peanut" class="comm-input" min="0" step="any" value="15" required>
+                <span class="comm-unit">kg</span>
+              </div>
+            </div>
+
+            <!-- 8. Jaggery -->
+            <div class="commodity-input-card">
+              <div class="comm-label"><span>🍯</span><span>गुड़ (Jaggery - रसियाव/नाश्ता)</span></div>
+              <div class="comm-input-row">
+                <input type="number" id="bulk_jaggery" class="comm-input" min="0" step="any" value="12" required>
+                <span class="comm-unit">kg</span>
+              </div>
+            </div>
+
+            <!-- 9. Oil -->
+            <div class="commodity-input-card">
+              <div class="comm-label"><span>🫗</span><span>खाद्य तेल (Edible Oil)</span></div>
+              <div class="comm-input-row">
+                <input type="number" id="bulk_oil" class="comm-input" min="0" step="any" value="20" required>
+                <span class="comm-unit">Litre</span>
+              </div>
+            </div>
+
+            <!-- 10. Salt & Spices -->
+            <div class="commodity-input-card">
+              <div class="comm-label"><span>🧂</span><span>नमक व मसाले (Salt & Spices)</span></div>
+              <div class="comm-input-row">
+                <input type="number" id="bulk_salt_spices" class="comm-input" min="0" step="any" value="8" required>
+                <span class="comm-unit">kg</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Automatic Panji 8 Checkbox -->
+          <div style="margin-top:16px; background:#F5F3FF; border:1px solid #DDD6FE; border-radius:8px; padding:12px 14px; display:flex; align-items:center; gap:10px;">
+            <input type="checkbox" id="chkAutoGeneratePanji" checked style="width:18px; height:18px; cursor:pointer;">
+            <label for="chkAutoGeneratePanji" style="font-size:13px; font-weight:700; color:#4C1D95; cursor:pointer;">
+              ✅ स्टॉक जोड़ते ही 35 बच्चों का पूरे माह का दैनिक भंडार पंजी (रविवार अवकाश व छुट्टियों सहित 1 से 30/31 तारीख) तुरंत भरें
+            </label>
+          </div>
+        </div>
+
+        <div class="modal-footer" style="flex-shrink:0; background:#F8FAFC; border-top:1px solid #E2E8F0; padding:12px 20px;">
+          <button type="button" class="btn btn-secondary" data-close="modalBulkStock">रद्द करें</button>
+          <button type="submit" class="btn btn-primary" style="background:#4A148C; border-color:#311B92; padding:10px 20px;">
+            <span class="btn-icon">⚡</span>
+            <span>स्टॉक जोड़ें एवं 35 बच्चों का पूरा रजिस्टर तैयार करें</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 1: STOCK INWARD (स्टॉक आवक प्रविष्टि) -->
+  <div class="modal-overlay" id="modalInward">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">📥 भंडार आवक प्रविष्टि (Stock Inward)</h3>
+        <button class="modal-close" data-close="modalInward">&times;</button>
+      </div>
+      <form id="formInward" class="modal-body">
+        <div class="form-group">
+          <label>तारीख (Date):</label>
+          <input type="date" id="inwardDate" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+          <label>सामग्री चुनें (Select Commodity):</label>
+          <select id="inwardItemSelect" class="form-select" required>
+            <!-- Dynamically populated from commodities list -->
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>प्राप्त मात्रा (Quantity):</label>
+            <input type="number" id="inwardQuantity" class="form-input" min="0.1" step="any" placeholder="उदा. 50" required>
+          </div>
+          <div class="form-group">
+            <label>इकाई (Unit):</label>
+            <input type="text" id="inwardUnit" class="form-input" readonly value="कि.ग्रा. (kg)">
+          </div>
+        </div>
+        <div id="inwardMilkNotice" style="display:none; font-size:11.5px; font-weight:700; color:#15803D; background:#DCFCE7; padding:6px 10px; border-radius:4px; margin-bottom:12px; border:1px solid #86EFAC;">
+          💡 सूखा दूध पाउडर: आवक प्रविष्टि कि.ग्रा. (kg) में करें (1 कि.ग्रा. = 5 पैकेट | 1 पैकेट = 200 ग्राम)
+        </div>
+
+        <div class="form-group">
+          <label>आपूर्ति स्रोत (Supply Source):</label>
+          <select id="inwardSourceSelect" class="form-select" required>
+            <option value="SFC राज्य खाद्य निगम (PDS Godown)">SFC राज्य खाद्य निगम (PDS Godown - चावल)</option>
+            <option value="आंगनवाड़ी विकास समिति (संयुक्त खाता क्रय)">आंगनवाड़ी विकास समिति (संयुक्त खाता क्रय - दाल/तेल/अंडा/मसाले)</option>
+            <option value="जिला/प्रखंड आपूर्ति">जिला/प्रखंड आपूर्ति</option>
+            <option value="अन्य">अन्य</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>चालान / रसीद / बिल संख्या (Challan/Bill No.):</label>
+          <input type="text" id="inwardChallan" class="form-input" placeholder="उदा. SFC/2026/09/142 या नकद रसीद 45">
+        </div>
+
+        <div class="form-group">
+          <label>टिप्पणी (Notes):</label>
+          <input type="text" id="inwardNotes" class="form-input" placeholder="अतिरिक्त विवरण...">
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-close="modalInward">रद्द करें</button>
+          <button type="submit" class="btn btn-primary">आवक दर्ज करें</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 2: DAILY MEAL (HCM) CONSUMPTION (दैनिक भोजन एवं नाश्ता खपत) -->
+  <div class="modal-overlay" id="modalDailyHcm">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">🍲 दैनिक गर्म पका भोजन (HCM) एवं नाश्ता खपत</h3>
+        <button class="modal-close" data-close="modalDailyHcm">&times;</button>
+      </div>
+      <form id="formDailyHcm" class="modal-body">
+        <div class="form-group">
+          <label>तारीख (Date):</label>
+          <input type="date" id="hcmDate" class="form-input" required>
+        </div>
+
+        <!-- Bihar Menu Day Quick Selector -->
+        <div class="form-group">
+          <label>बिहार साप्ताहिक मेनू दिन चुनें:</label>
+          <select id="hcmDayPresetSelect" class="form-select font-bold">
+            <option value="1">सोमवार: भुना चना और मूंगफली | चावल का पुलाव</option>
+            <option value="2">मंगलवार: मौसमी फल + दूध | चना आलू की सब्जी व चावल</option>
+            <option value="3" selected>बुधवार: अंकुरित चना, गुड़ + अंडा/मूंगफली | सोयाबीन की सब्जी व चावल</option>
+            <option value="4">गुरुवार: मौसमी फल + दूध | रसियाव (गुड़ खीर)</option>
+            <option value="5">शुक्रवार: मौसमी फल + अंडा/मूंगफली | कद्दू दाल / साग दाल व चावल</option>
+            <option value="6">शनिवार: मौसमी फल | चावल दाल की खिचड़ी</option>
+            <option value="7">एक अतिरिक्त दिन (25वाँ दिन): निर्धारित विशेष पोषाहार</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>उपस्थित बच्चे (3-6 वर्ष Preschoolers):</label>
+            <input type="number" id="hcmChildrenCount" class="form-input font-bold" min="1" max="100" value="38" required>
+          </div>
+          <div class="form-group">
+            <label>अंडा खाने वाले बच्चे (बुध/शुक्र):</label>
+            <input type="number" id="hcmEggsCount" class="form-input font-bold" min="0" max="100" value="34">
+          </div>
+        </div>
+
+        <!-- Calculated Auto-Deduction Preview Box -->
+        <div class="calc-preview-box">
+          <div class="calc-header">
+            <span>📊 बिहार मानक अनुसार स्वतः अनुमानित दैनिक खपत:</span>
+          </div>
+          <div class="calc-list" id="hcmCalcPreviewList">
+            <!-- Dynamically populated based on children count & preset -->
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-close="modalDailyHcm">रद्द करें</button>
+          <button type="submit" class="btn btn-success">खपत लेजर में दर्ज करें</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 3: TAKE-HOME RATION (THR) DISTRIBUTION (टेक होम राशन वितरण) -->
+  <div class="modal-overlay" id="modalThr">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">📦 टेक होम राशन (THR / सूखा राशन) वितरण</h3>
+        <button class="modal-close" data-close="modalThr">&times;</button>
+      </div>
+      <form id="formThr" class="modal-body">
+        <div class="form-group">
+          <label>वितरण तारीख (Date):</label>
+          <input type="date" id="thrDate" class="form-input" required>
+        </div>
+
+        <div class="form-section-title">बिहार मानक लाभार्थी संख्या दर्ज करें:</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>6m-3y सामान्य व MAM बच्चे (2.5kg चावल/1.25kg दाल):</label>
+            <input type="number" id="thrNormalKidsCount" class="form-input" min="0" value="32" required>
+          </div>
+          <div class="form-group">
+            <label>6m-3y अतिकुपोषित (SAM) बच्चे (3.75kg चावल/1.75kg दाल):</label>
+            <input type="number" id="thrSamKidsCount" class="form-input" min="0" value="4" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>गर्भवती महिलाएं (3.0kg चावल/1.5kg दाल):</label>
+            <input type="number" id="thrPwCount" class="form-input" min="0" value="12" required>
+          </div>
+          <div class="form-group">
+            <label>धात्री माताएं (3.0kg चावल/1.5kg दाल):</label>
+            <input type="number" id="thrLmCount" class="form-input" min="0" value="10" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>वितरण प्रकार:</label>
+          <select id="thrProteinOption" class="form-select">
+            <option value="eggs">अंडा वितरण (प्रति लाभार्थी 8 या 12 अंडे)</option>
+            <option value="soybean">सोयाबीन बड़ी विकल्प (500g/875g/600g)</option>
+          </select>
+        </div>
+
+        <!-- Calculated THR Auto-Deduction Preview Box -->
+        <div class="calc-preview-box">
+          <div class="calc-header">
+            <span>📦 बिहार THR कोटा अनुसार कुल वितरण मात्रा:</span>
+          </div>
+          <div class="calc-list" id="thrCalcPreviewList">
+            <!-- Dynamically populated based on counts -->
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-close="modalThr">रद्द करें</button>
+          <button type="submit" class="btn btn-warning">THR वितरण दर्ज करें</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Android APK Fixed Bottom Navigation Bar (Material BottomNav) -->
+  <nav class="mobile-bottom-nav no-print" id="mobileBottomNav">
+    <div class="bottom-nav-container">
+      <button class="nav-tab active" data-view="dashboard" id="tabDashboard">
+        <span class="tab-icon">🏠</span>
+        <span class="tab-label">डैशबोर्ड</span>
+      </button>
+      <button class="nav-tab" data-view="autoPanji" id="tabAutoPanji">
+        <span class="tab-icon">📅</span>
+        <span class="tab-label">भंडार पंजी</span>
+      </button>
+      <button class="nav-tab" data-view="inventory" id="tabInventory">
+        <span class="tab-icon">📦</span>
+        <span class="tab-label">स्टॉक लेजर</span>
+      </button>
+
+      <button class="nav-tab" data-view="settings" id="tabSettings">
+        <span class="tab-icon">⚙️</span>
+        <span class="tab-label">सेटिंग्स</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container no-print"></div>
+
+  <!-- JavaScript Scripts with Cache Busting -->
+  <script src="js/i18n.js?v=20260917_14"></script>
+  <script src="js/data.js?v=20260917_14"></script>
+  <script src="js/bihar-menu.js?v=20260917_14"></script>
+  <script src="js/inventory.js?v=20260917_14"></script>
+  <script src="js/auto-register.js?v=20260917_14"></script>
+
+  <script src="js/export.js?v=20260917_14"></script>
+  <script src="js/app.js?v=20260917_14"></script>
+  <!-- Fix #5: PWA Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('SW registered:', reg.scope))
+          .catch(err => console.warn('SW registration failed:', err));
+      });
+    }
+  </script>
+</body>
+</html>

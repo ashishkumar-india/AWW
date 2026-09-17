@@ -1,0 +1,233 @@
+/* ==========================================================================
+   Bihar State ICDS - Anganwadi Sevika Management System
+   Responsive & Accessibility Styles: css/responsive.css
+   ========================================================================== */
+
+/* Menu schedule grid styles */
+.menu-schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.day-card {
+  background: var(--surface);
+  border: 1px solid var(--neutral-border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.day-card.highlight-day {
+  border-color: #FFE082;
+  background: #FFFDF7;
+}
+
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--neutral-border);
+}
+
+.day-badge {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--neutral-dark);
+}
+
+.meal-tag {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 8px;
+  background: #F1F5F9;
+  border-radius: var(--radius-full);
+}
+
+.special-tag {
+  background: #FFF3E0;
+  color: #E65100;
+  border: 1px solid #FFE0B2;
+}
+
+.meal-slot {
+  margin-bottom: 10px;
+}
+
+.slot-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--primary);
+  display: block;
+}
+
+.meal-slot p {
+  font-size: 13px;
+  color: var(--neutral-body);
+  margin-top: 2px;
+}
+
+/* Settings Grid */
+.settings-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+/* Tablet & Mobile Media Queries */
+@media (max-width: 900px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .settings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mpr-meta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mpr-signatures-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .main-content {
+    padding: 14px;
+  }
+
+  .brand-title {
+    font-size: 15px;
+  }
+
+  .view-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .action-buttons-group {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .action-buttons-group .btn {
+    width: 100%;
+  }
+
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stock-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-container {
+    padding: 0 14px;
+  }
+
+  .nav-tab {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .mpr-paper-document {
+    padding: 18px 14px;
+  }
+
+  .mpr-main-title {
+    font-size: 15px;
+  }
+
+  .filter-search-box {
+    width: 100%;
+  }
+
+  .modal-container {
+    max-height: 95vh;
+  }
+
+  /* Mobile APK Specific Responsive Tweaks */
+  .dash-hero-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .dash-hero-stats {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .dash-stat-pill {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 8px 14px;
+  }
+
+  .dash-stat-pill .stat-num {
+    font-size: 20px;
+  }
+
+  .dash-meal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dash-actions-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .dash-stock-glance-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .dash-progress-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .mobile-bottom-nav {
+    height: 60px;
+  }
+
+  .mobile-bottom-nav .nav-tab {
+    padding: 4px 2px;
+  }
+
+  .mobile-bottom-nav .nav-tab .tab-icon {
+    font-size: 18px;
+  }
+
+  .mobile-bottom-nav .nav-tab .tab-label {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .dash-actions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dash-stock-glance-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
