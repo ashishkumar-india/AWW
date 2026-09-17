@@ -41,11 +41,59 @@ CREATE TABLE IF NOT EXISTS awc_day_overrides (
   PRIMARY KEY (awc_code, date)
 );
 
-ALTER TABLE awc_profile       DISABLE ROW LEVEL SECURITY;
-ALTER TABLE awc_beneficiaries DISABLE ROW LEVEL SECURITY;
-ALTER TABLE awc_transactions  DISABLE ROW LEVEL SECURITY;
-ALTER TABLE awc_opening_stock DISABLE ROW LEVEL SECURITY;
-ALTER TABLE awc_day_overrides DISABLE ROW LEVEL SECURITY;
+-- ================================================================
+-- ROW LEVEL SECURITY (RLS) — Full Data Protection
+-- Only authenticated users (logged in with Email+Password) can access data.
+-- Anyone cloning the repo or using the API without logging in is completely blocked.
+-- ================================================================
 
-ALTER PUBLICATION supabase_realtime ADD TABLE awc_transactions;
-ALTER PUBLICATION supabase_realtime ADD TABLE awc_profile;
+ALTER TABLE awc_profile       ENABLE ROW LEVEL SECURITY;
+ALTER TABLE awc_beneficiaries ENABLE ROW LEVEL SECURITY;
+ALTER TABLE awc_transactions  ENABLE ROW LEVEL SECURITY;
+ALTER TABLE awc_opening_stock ENABLE ROW LEVEL SECURITY;
+ALTER TABLE awc_day_overrides ENABLE ROW LEVEL SECURITY;
+
+-- 1. Profile Policy
+DROP POLICY IF EXISTS "Auth users only" ON awc_profile;
+CREATE POLICY "Auth users only" ON awc_profile
+  FOR ALL TO authenticated
+  USING (true) WITH CHECK (true);
+
+-- 2. Beneficiaries Policy
+DROP POLICY IF EXISTS "Auth users only" ON awc_beneficiaries;
+CREATE POLICY "Auth users only" ON awc_beneficiaries
+  FOR ALL TO authenticated
+  USING (true) WITH CHECK (true);
+
+-- 3. Transactions Policy
+DROP POLICY IF EXISTS "Auth users only" ON awc_transactions;
+CREATE POLICY "Auth users only" ON awc_transactions
+  FOR ALL TO authenticated
+  USING (true) WITH CHECK (true);
+
+-- 4. Opening Stock Policy
+DROP POLICY IF EXISTS "Auth users only" ON awc_opening_stock;
+CREATE POLICY "Auth users only" ON awc_opening_stock
+  FOR ALL TO authenticated
+  USING (true) WITH CHECK (true);
+
+-- 5. Day Overrides Policy
+DROP POLICY IF EXISTS "Auth users only" ON awc_day_overrides;
+CREATE POLICY "Auth users only" ON awc_day_overrides
+  FOR ALL TO authenticated
+  USING (true) WITH CHECK (true);
+
+-- Realtime replication
+DO $$
+BEGIN
+  ALTER PUBLICATION supabase_realtime ADD TABLE awc_transactions;
+EXCEPTION WHEN duplicate_object THEN
+  NULL;
+END $$;
+
+DO $$
+BEGIN
+  ALTER PUBLICATION supabase_realtime ADD TABLE awc_profile;
+EXCEPTION WHEN duplicate_object THEN
+  NULL;
+END $$;

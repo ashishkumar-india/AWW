@@ -71,8 +71,16 @@ function _showLoginOverlay(sb) {
     } else {
       // Login success
       _hideLoginOverlay();
-      // Wait for Supabase data to load then init app
-      if (window.dbReady) await window.dbReady;
+      // Initialize or re-fetch Supabase data with authenticated session
+      if (window.db && typeof window.db.initialize === "function") {
+        try {
+          await window.db.initialize();
+        } catch (err) {
+          console.warn("DB init after login:", err);
+        }
+      } else if (window.dbReady) {
+        await window.dbReady;
+      }
       if (window.initApp) window.initApp();
     }
   });
