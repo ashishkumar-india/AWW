@@ -14,6 +14,8 @@
   <link rel="manifest" href="manifest.json">
   <!-- Fix #12: Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%234F46E5'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-size='50'>📖</text></svg>">
+  <!-- Supabase JS CDN (must load before app scripts) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   
   <!-- Google Fonts: Outfit & Noto Sans Devanagari -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,6 +61,11 @@
             <div class="pill-title" id="pillAwcName">मालती कुमारी - केंद्र 201</div>
             <div class="pill-sub" id="pillAwcCode">कोड: 201</div>
           </div>
+        </div>
+        <!-- Supabase Sync Status Indicator -->
+        <div id="syncStatusPill" style="display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;background:rgba(0,0,0,0.06);font-size:12px;font-weight:600;cursor:default;" title="Supabase connection status">
+          <span id="syncDot" style="width:8px;height:8px;border-radius:50%;background:#F59E0B;display:inline-block;transition:background 0.4s;"></span>
+          <span id="syncLabel" style="color:inherit;">Sync...</span>
         </div>
       </div>
     </div>
@@ -1493,6 +1500,9 @@
   <!-- JavaScript Scripts with Cache Busting -->
   <script src="js/i18n.js?v=20260917_14"></script>
   <script src="js/data.js?v=20260917_14"></script>
+  <!-- Supabase config + SupabaseDataStore (must be after data.js, before app.js) -->
+  <script src="js/supabase-config.js?v=20260917_15"></script>
+  <script src="js/db-supabase.js?v=20260917_15"></script>
   <script src="js/bihar-menu.js?v=20260917_14"></script>
   <script src="js/inventory.js?v=20260917_14"></script>
   <script src="js/auto-register.js?v=20260917_14"></script>

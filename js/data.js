@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    Bihar State ICDS - Anganwadi Sevika Management System
    Data Models, Bihar Commodities & LocalStorage Engine: js/data.js
    Updated specifically as per Bihar ICDS दरियापुर (सारण) official menu
@@ -556,3 +556,5 @@ class DataStore {
 window.BIHAR_COMMODITIES = BIHAR_COMMODITIES;
 window.DataStore = DataStore;
 window.db = new DataStore();
+// Default dbReady (overridden by db-supabase.js if Supabase is configured)
+if (!window.dbReady) window.dbReady = Promise.resolve(window.db);

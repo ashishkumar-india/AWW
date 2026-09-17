@@ -1,9 +1,11 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    Bihar State ICDS - Anganwadi Sevika Management System
    Application Coordinator & UI Controller: js/app.js
    ========================================================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  // Wait for Supabase to load fresh data (or fall through instantly if offline/not configured)
+  if (window.dbReady) await window.dbReady;
   initApp();
 });
 
