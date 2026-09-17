@@ -55,11 +55,14 @@ function _showLoginOverlay(sb) {
     const { error } = await sb.auth.signInWithPassword({ email, password });
 
     if (error) {
-      let msg = "गलत Email या Password। कृपया पुनः प्रयास करें।";
-      if (error.message && error.message.includes("Invalid login")) {
+      console.error("Supabase Auth Error:", error);
+      let msg = "❌ गलत Email या Password। कृपया पुनः प्रयास करें।";
+      if (error.message && (error.message.includes("Invalid login") || error.message.includes("invalid_credentials"))) {
         msg = "❌ गलत Email या Password।";
       } else if (error.message && error.message.includes("Email not confirmed")) {
         msg = "⚠️ Email confirm नहीं हुई। Supabase में 'Confirm email' बंद करें।";
+      } else if (error.message && (error.message.includes("fetch") || error.message.includes("Network"))) {
+        msg = "⚠️ इंटरनेट कनेक्शन या Supabase सर्वर से संपर्क नहीं हो सका।";
       }
       errorEl.textContent = msg;
       errorEl.style.display = "block";

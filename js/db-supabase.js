@@ -9,7 +9,8 @@ class SupabaseDataStore extends DataStore {
   constructor() {
     super(); // loads from localStorage immediately (instant render)
     const cfg = window.SUPABASE_CONFIG;
-    this._sb = window.supabase.createClient(cfg.url, cfg.key);
+    this._sb = window._sbAuthClient || window.supabase.createClient(cfg.url, cfg.key);
+    window._sbAuthClient = this._sb;
     this.awcCode = cfg.awcCode || "201";
   }
 
