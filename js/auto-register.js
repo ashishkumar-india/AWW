@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    Bihar State ICDS - Anganwadi Sevika Management System
    Full Month Date-Wise Bhandar Panji (Register-8) Auto-Generator: js/auto-register.js
    Supports 35 children (with date-wise inline attendance editing),
@@ -379,7 +379,7 @@ function saveBulkMonthlyStockAndGenerate(data) {
   const year = Number(data.year || 2026);
   const childCount = Number(data.childCount || 35);
   const arrivalDate = data.arrivalDate || `${year}-${month.toString().padStart(2, "0")}-01`;
-  const challan = data.challan || `SFC/SARAN/${year}/${month.toString().padStart(2, "0")}/101`;
+  const challan = data.challan || `SFC/${year}/${month.toString().padStart(2, "0")}/101`;
 
   const commodities = [
     { id: "rice", qty: Number(data.rice || 0), source: "SFC राज्य खाद्य निगम (PDS Godown - चावल)" },
@@ -446,7 +446,7 @@ function renderMonthlyBhandarPanjiUI() {
   const childCount = Number(document.getElementById("panjiChildCountInput")?.value || 35);
 
   const panji = generateMonthlyBhandarPanji(year, month, childCount, 8);
-  const profile = window.db ? window.db.getProfile() : { awcName: "दरियापुर - केंद्र 201", project: "दरियापुर (सारण)", cdpoName: "अंजू सिंह", sevikaName: "मंजू देवी" };
+  const profile = window.db ? window.db.getProfile() : { awcName: "आंगनवाड़ी केंद्र", project: "", cdpoName: "", sevikaName: "" };
 
   // Update Summary KPI Bar
   setText("panjiTotalDays", `${panji.daysInMonth} दिन`);

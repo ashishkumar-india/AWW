@@ -167,19 +167,19 @@ function refreshCentreProfileDisplay() {
  * Fixes: #9 (dynamic month name), #10 (dynamic child count from DB), #14 (no hard-coded centre 18)
  */
 function renderDashboardUI() {
-  const profile = window.db ? window.db.getProfile() : { sevikaName: "मालती कुमारी", awcCode: "201", awcName: "दरियापुर - केंद्र 201" };
+  const profile = window.db ? window.db.getProfile() : { sevikaName: "", awcCode: "", awcName: "आंगनवाड़ी केंद्र" };
   const beneficiaries = window.db ? window.db.getBeneficiaries() : null;
-  const defaultChildCount = beneficiaries ? beneficiaries.preschoolKids : 35;
+  const defaultChildCount = beneficiaries ? (beneficiaries.preschoolKids || 35) : 35;
 
   // 1. Hero Card details
   const heroTitle = document.getElementById("dashHeroTitle");
-  if (heroTitle) heroTitle.textContent = `नमस्ते, ${profile.sevikaName || "मालती कुमारी"} जी! 🙏`;
+  if (heroTitle) heroTitle.textContent = `नमस्ते, ${profile.sevikaName ? profile.sevikaName + " जी" : "सेविका जी"}! 🙏`;
 
   const awcNameEl = document.getElementById("dashAwcName");
-  if (awcNameEl) awcNameEl.textContent = profile.awcName || "दरियापुर - केंद्र 201";
+  if (awcNameEl) awcNameEl.textContent = profile.awcName || "आंगनवाड़ी केंद्र";
 
   const awcCodeEl = document.getElementById("dashAwcCode");
-  if (awcCodeEl) awcCodeEl.textContent = profile.awcCode || "201";
+  if (awcCodeEl) awcCodeEl.textContent = profile.awcCode || "---";
 
   // Fix #10: update child count from DB
   const childCountEl = document.getElementById("dashChildCount");
@@ -608,7 +608,7 @@ function setupFormSubmissions() {
     const month = Number(document.getElementById("bulkStockMonth")?.value || 9);
     const year = Number(document.getElementById("bulkStockYear")?.value || 2026);
     const arrivalDate = document.getElementById("bulkStockDate")?.value || `${year}-${month.toString().padStart(2, "0")}-01`;
-    const challan = document.getElementById("bulkStockChallan")?.value || `SFC/SARAN/${year}/${month}/108`;
+    const challan = document.getElementById("bulkStockChallan")?.value || `SFC/${year}/${month}/108`;
     const childCount = Number(document.getElementById("bulkStockChildCount")?.value || 35);
     const autoGen = document.getElementById("chkAutoGeneratePanji")?.checked;
 

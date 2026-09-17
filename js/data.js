@@ -1,14 +1,17 @@
 /* ==========================================================================
    Bihar State ICDS - Anganwadi Sevika Management System
    Data Models, Bihar Commodities & LocalStorage Engine: js/data.js
-   Updated specifically as per Bihar ICDS दरियापुर (सारण) official menu
+   Official Bihar ICDS Approved Nutrition Standards
    ========================================================================== */
 
-const STORAGE_KEY = "AWW_BIHAR_INVENTORY_MPR_V2";
+const STORAGE_KEY = "AWW_BIHAR_INVENTORY_MPR_V3";
 window.STORAGE_KEY = STORAGE_KEY;
-try { localStorage.removeItem("AWW_BIHAR_INVENTORY_MPR_V1"); } catch (e) {}
+try {
+  localStorage.removeItem("AWW_BIHAR_INVENTORY_MPR_V1");
+  localStorage.removeItem("AWW_BIHAR_INVENTORY_MPR_V2");
+} catch (e) {}
 
-// Bihar ICDS Approved Commodities Master (As per Dariyapur, Saran official menu)
+// Bihar ICDS Approved Commodities Master (Official Standard)
 var BIHAR_COMMODITIES = window.BIHAR_COMMODITIES = [
   {
     id: "rice",
@@ -133,17 +136,17 @@ var BIHAR_COMMODITIES = window.BIHAR_COMMODITIES = [
   }
 ];
 
-// Seed Profile for Dariyapur, Saran (as per user's official chart)
+// Centre Profile (Clean template - no personal names)
 const INITIAL_CENTRE_PROFILE = {
-  district: "सारण (Saran)",
-  project: "दरियापुर (Dariyapur)",
-  sector: "सेक्टर-02",
-  panchayat: "दरियापुर पंचायत",
-  awcName: "दरियापुर - केंद्र 201",
-  awcCode: "201",
-  sevikaName: "मालती कुमारी",
-  sahayikaName: "सुनीता कुमारी",
-  cdpoName: "अंजू सिंह"
+  district: "",
+  project: "",
+  sector: "",
+  panchayat: "",
+  awcName: "आंगनवाड़ी केंद्र",
+  awcCode: "",
+  sevikaName: "",
+  sahayikaName: "",
+  cdpoName: ""
 };
 
 // Registered Beneficiaries count (Clean defaults)
@@ -172,14 +175,6 @@ class DataStore {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
-        if (parsed && parsed.profile) {
-          if (parsed.profile.sevikaName === "मंजू देवी" || !parsed.profile.sevikaName) {
-            parsed.profile.sevikaName = "मालती कुमारी";
-          }
-          if (parsed.profile.awcCode === "1024805" || !parsed.profile.awcCode) {
-            parsed.profile.awcCode = "201";
-          }
-        }
         return parsed;
       }
     } catch (e) {
